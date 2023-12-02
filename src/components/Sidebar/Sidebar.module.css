@@ -1,0 +1,27 @@
+
+.sidebar {
+    min-width: 350px;
+    height: 100%;
+    background-color: #FFFFFF;
+    border-right: 1px solid #C5C5C5;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.networks {
+    padding-bottom: 17px;
+    font-size: 1.2rem;
+}
+
+.title {
+    font-weight: normal;
+    font-size: 1.8rem;
+}
+
+.subTitle {
+    padding-bottom: 17px;
+    font-size: 1.2rem;
+    margin-top: 35px;
+}

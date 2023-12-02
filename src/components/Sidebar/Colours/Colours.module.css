@@ -1,0 +1,28 @@
+
+.dropdown {
+    width: 100%;
+    background-color: white;
+    border: 1px solid #929292;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+.dropdownWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.colourCircle {
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+}
+
+.dropdownOption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #757575;
+}
