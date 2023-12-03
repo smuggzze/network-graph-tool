@@ -1,0 +1,36 @@
+
+.detailsSidebar {
+    border-left: 1px solid #C5C5C5;
+    position: relative;
+    overflow: visible;
+    padding: 0px !important;
+}
+
+.toggleSidebarButton {
+    background-color: white;
+    border: 1px solid #929292;
+    border-radius: 6px;
+    width: 50px;
+    height: 30px;
+    font-size: 1.1rem;
+    position: absolute;
+    left: -25px;
+    top: 15px;
+    cursor: pointer;
+}
+
+.detailPairs {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.detailsWrapper {
+    padding-bottom: 17px;
+    border-bottom: 1px solid #C5C5C5;
+}
+
+.detailsWrapper > * {
+    padding-left: 15px;
+    padding-right: 15px;
+}

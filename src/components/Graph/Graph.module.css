@@ -1,4 +1,25 @@
 
 .wrapper {
     background-color: #F0F2F4;
+    padding: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.resetGraph {
+    width: 120px;
+    height: 36px;
+    font-size: 1rem;
+    box-shadow: 0px 0px 5px rgb(202, 202, 202);
+}
+
+.networkName {
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.graphOptions {
+    width: fit-content;
+    position: absolute;
+    z-index: 20;
 }

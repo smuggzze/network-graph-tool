@@ -1,20 +1,38 @@
 import styles from "./Sidebar.module.css";
 import NetworksList from "./NetworksList/NetworksList";
-import NetworkComparisons from "./NetworkComparisons/NetworkComparisons";
+import RunAlgorithms from "../RunAlgorithms/RunAlgorithms";
 import Colours from "./Colours/Colours";
+
+const comparisonMethods = Object.freeze({
+    "Degree Centrality": null,
+    "Betweenness Centrality": null,
+    "Closeness Centrality": null,
+    "Eigenvector Centrality": null,
+    "Common Node ID's": null, 
+    "Jaccard Similarity": null,
+    "Strongly Connected Components": null
+});
 
 function Sidebar() {
     return (
-        <div className={styles.sidebar}>
+        <div className={`sidebar ${styles.leftSidebar}`}>
             <div>
-                <h1 className={styles.title}>EZ Graph</h1>
-                <p className={styles.subTitle}>Networks (max 2)</p>
+                <h1 className={styles.title}>
+                    EZ Graph
+                </h1>
+                <h2 className="sidebarSubTitle">
+                    Networks (max 2)
+                </h2>
                 <NetworksList />
-                <p className={styles.subTitle}>Compare Networks</p>
-                <NetworkComparisons />
+                <h2 className="sidebarSubTitle">
+                    Compare networks
+                </h2>
+                <RunAlgorithms algorithms={comparisonMethods} />
             </div>
             <div>
-                <p className={styles.subTitle}>Colours</p>
+                <h2 className="sidebarSubTitle">
+                    Colours
+                </h2>
                 <Colours />
             </div>
         </div>

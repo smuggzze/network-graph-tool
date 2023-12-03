@@ -1,27 +1,19 @@
 
-.runComparison {
+.runAlgorithm {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
 }
 
-.comparisonText {
-    color: #757575;
-}
-
 .runButton {
-    background-color: #22BEC8;
-    color: white;
-    border: none;
-    border-radius: 4px;
     font-size: 0.9rem;
     width: 45px;
-    height: 20px;
+    height: 24px;
     cursor: pointer;
 }
 
-.networkComparisons {
+.algorithms {
     display: flex;
     gap: 22px;
     flex-direction: column;

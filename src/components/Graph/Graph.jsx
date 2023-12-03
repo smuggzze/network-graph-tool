@@ -7,6 +7,14 @@ function Graph() {
 
     return (
         <div className={styles.wrapper}>
+            <div className={styles.graphOptions}>
+                <button className={`${styles.resetGraph} primary-btn`}>
+                    Reset graph
+                </button>
+                <p className={`side-text ${styles.networkName}`}>
+                    Example network 1
+                </p>
+            </div>
             <ForceGraph2D
                 width={windowSize - 700}
                 graphData={{
