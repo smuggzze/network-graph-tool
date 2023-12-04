@@ -4,13 +4,13 @@ import RunAlgorithms from "../RunAlgorithms/RunAlgorithms";
 import Colours from "./Colours/Colours";
 
 const comparisonMethods = Object.freeze({
-    "Degree Centrality": null,
-    "Betweenness Centrality": null,
-    "Closeness Centrality": null,
-    "Eigenvector Centrality": null,
-    "Common Node ID's": null, 
-    "Jaccard Similarity": null,
-    "Strongly Connected Components": null
+    "Degree Centrality": () => {},
+    "Betweenness Centrality": () => {},
+    "Closeness Centrality": () => {},
+    "Eigenvector Centrality": () => {},
+    "Common Node ID's": () => {}, 
+    "Jaccard Similarity": () => {},
+    "Strongly Connected Components": () => {}
 });
 
 function Sidebar() {

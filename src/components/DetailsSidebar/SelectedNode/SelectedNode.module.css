@@ -1,0 +1,21 @@
+
+.nodeInfo {
+    display: flex;
+    width: 100%;
+}
+
+.labelBox {
+    padding-top: 9px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid #C5C5C5;
+    border-right: 1px solid #C5C5C5;
+    width: 70%;
+}
+
+.valueBox {
+    padding-top: 9px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid #C5C5C5;
+    width: 30%;
+    padding-left: 9px;
+}

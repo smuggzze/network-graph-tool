@@ -2,12 +2,12 @@ import RunAlgorithms from "../../RunAlgorithms/RunAlgorithms";
 import styles from "../DetailsSidebar.module.css";
 
 const networkStatistics = Object.freeze({
-    "Avg. Clustering Coefficient": null,
-    "Avg. Path Length": null,
-    "Graph Density": null,
-    "Network Diameter": null,
-    "Connected Components": null,
-    "Avg. Degree": null
+    "Avg. Clustering Coefficient": () => {},
+    "Avg. Path Length": () => {},
+    "Graph Density": () => {},
+    "Network Diameter": () => {},
+    "Connected Components": () => {},
+    "Avg. Degree": () => {}
 });
 
 function NetworkStatistics() {
