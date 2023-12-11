@@ -3,7 +3,7 @@ import GraphDetailsPair from "./GraphDetailsPair";
 
 function GraphDetails() {
     return (
-        <div className={styles.detailsWrapper} style={{ marginTop: "63px" }}>
+        <div className={styles.detailsWrapper} style={{ marginTop: "76px" }}>
             <h2 className="sidebarSubTitle">
                 Graph details
             </h2>

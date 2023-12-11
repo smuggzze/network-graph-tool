@@ -1,9 +1,16 @@
 import styles from "./NetworksList.module.css";
 
-function NetworkListItem() {
+function NetworkListItem({ networkName }) {
+    function removeNetwork() {
+
+    }
+
     return (
         <div className={styles.listItem}>
-            Example network 1
+            <p>{networkName}</p>
+            <button className={`btn ${styles.removeBtn}`} onClick={removeNetwork}>
+                Remove
+            </button>
         </div>
     )
 }

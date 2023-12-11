@@ -13,28 +13,20 @@ const comparisonMethods = Object.freeze({
     "Strongly Connected Components": () => {}
 });
 
-function Sidebar() {
+function Sidebar({ networkNames }) {
     return (
         <div className={`sidebar ${styles.leftSidebar}`}>
             <div>
                 <h1 className={styles.title}>
                     EZ Graph
                 </h1>
-                <h2 className="sidebarSubTitle">
-                    Networks (max 2)
-                </h2>
-                <NetworksList />
+                <NetworksList networkNames={networkNames} />
                 <h2 className="sidebarSubTitle">
                     Compare networks
                 </h2>
                 <RunAlgorithms algorithms={comparisonMethods} />
             </div>
-            <div>
-                <h2 className="sidebarSubTitle">
-                    Colours
-                </h2>
-                <Colours />
-            </div>
+            <Colours />
         </div>
     )
 }

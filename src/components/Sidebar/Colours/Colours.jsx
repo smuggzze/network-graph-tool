@@ -7,6 +7,9 @@ function Colours() {
     
     return (
         <div>
+            <h2 className="sidebarSubTitle">
+                Colours
+            </h2>
             <select className={styles.dropdown} onChange={(e) => setOption(e.target.value)}>
                 {Object.keys(graphColours).map((colour, index) => {
                     return (
