@@ -1,0 +1,32 @@
+
+.mainPage {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+
+.graphs {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+}
+
+.noNetworksFound {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.noNetworksText {
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+.startVisualising {
+    width: 140px;
+    height: 42px;
+    margin: auto;
+    display: block;
+}

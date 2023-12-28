@@ -13,14 +13,17 @@ const comparisonMethods = Object.freeze({
     "Strongly Connected Components": () => {}
 });
 
-function Sidebar({ networkNames }) {
+function Sidebar({ networkNames, toggleNetworkPopUp }) {
     return (
         <div className={`sidebar ${styles.leftSidebar}`}>
             <div>
                 <h1 className={styles.title}>
                     EZ Graph
                 </h1>
-                <NetworksList networkNames={networkNames} />
+                <NetworksList 
+                    networkNames={networkNames} 
+                    toggleNetworkPopUp={toggleNetworkPopUp}
+                />
                 <h2 className="sidebarSubTitle">
                     Compare networks
                 </h2>

@@ -1,32 +1,34 @@
 import NetworkListItem from "./NetworkListItem";
 import styles from "./NetworksList.module.css";
-import AddNetwork from "../../AddNetwork/AddNetwork";
-import { useState } from "react";
+import { useContext } from "react";
+import { GraphContext } from "../../Main/Main";
 
-function NetworksList({ networkNames }) {
-    const [addNetworkPopUp, setAddNetworkPopUp] = useState(false);
+function NetworksList({ networkNames, toggleNetworkPopUp }) {
+    const graphContext = useContext(GraphContext);
 
-    function openNetworkPopUp() {
-        setAddNetworkPopUp(true);
+    function updateSelectedGraph(networkName) {
+        graphContext.setSelectedGraph(graphContext.graphs.find((x) => x.networkName === networkName) || {});
     }
 
     return (
         <>
-            {addNetworkPopUp && <AddNetwork />}
             <h2 className="sidebarSubTitle">
                 Networks (max 2)
             </h2>
-            {networkNames.map((name, index) => {
+            {networkNames.map((name) => {
                 return (
                     <NetworkListItem
                         networkName={name}
-                        key={index}
+                        updateSelectedGraph={updateSelectedGraph}
+                        isSelected={graphContext.selectedGraph?.networkName === name}
+                        key={name}
                     />
                 )
             })}
-            <p className={styles.addNetwork} onClick={openNetworkPopUp}>
+            {networkNames.length < 2 &&
+            <button className={styles.addNetwork} onClick={toggleNetworkPopUp}>
                 + Add a network
-            </p>
+            </button>}
         </>
     )
 }
