@@ -42,7 +42,7 @@ function Main() {
                                 <Graph 
                                     graph={graph}
                                     isLastGraph={index == graphs.length - 1}
-                                    width={(windowSize - canvasOffset - 60) / graphs.length}
+                                    width={(windowSize - canvasOffset - 30) / graphs.length}
                                     key={graph.networkName}
                                 />
                             )
