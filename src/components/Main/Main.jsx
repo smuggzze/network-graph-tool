@@ -5,6 +5,7 @@ import DetailsSidebar from "../DetailsSidebar/DetailsSidebar";
 import { useState, createContext, useEffect } from "react";
 import useWindowSize from "../../hooks/useWindowSize";
 import AddNetwork from "../AddNetwork/AddNetwork";
+import TutorialPopup1 from "../TutorialPopup/TutorialPopup1";
 
 export const GraphContext = createContext({});
 export const nodeSize = 10;
@@ -15,9 +16,15 @@ function Main() {
     const [canvasOffset, setCanvasOffset] = useState(700);
     const [addNetworkPopUp, setAddNetworkPopUp] = useState(false);
     const [graphs, setGraphs] = useState([]);
+    const [addTutorialPopUp, setTutorialPopUp] = useState(true);
+    
 
     function toggleNetworkPopUp() {
         setAddNetworkPopUp((cur) => !cur);
+    }
+
+    function toggleTutorial() {
+        setTutorialPopUp((cur) => !cur);
     }
 
     useEffect(() => {
@@ -28,11 +35,19 @@ function Main() {
 
     return (
         <GraphContext.Provider value={{selectedGraph, setSelectedGraph, graphs, setGraphs}}>
+            {addTutorialPopUp && (
+                <TutorialPopup1
+                    setTutorialPopUp={setTutorialPopUp}
+                    toggleTutorial={toggleTutorial}
+                />
+            )}
             {addNetworkPopUp && <AddNetwork toggleNetworkPopUp={toggleNetworkPopUp} />}
             <div className={styles.mainPage}>
                 <Sidebar 
                     networkNames={graphs.map((graph) => graph.networkName)}
                     toggleNetworkPopUp={toggleNetworkPopUp} 
+                    setTutorialPopUp={setTutorialPopUp}
+                    toggleTutorial={toggleTutorial}
                 />
                 {selectedGraph != null ?
                 <>
@@ -66,6 +81,7 @@ function Main() {
                 </div>}
             </div>
         </GraphContext.Provider>
+        
     )
 }
 

@@ -13,13 +13,24 @@ const comparisonMethods = Object.freeze({
     "Strongly Connected Components": () => {}
 });
 
-function Sidebar({ networkNames, toggleNetworkPopUp }) {
+function Sidebar({ networkNames, toggleNetworkPopUp, setTutorialPopUp, toggleTutorial}) {
+    const handleToggle = () => {
+        setTutorialPopUp(true);
+        toggleTutorial;
+    };
+
     return (
         <div className={`sidebar ${styles.leftSidebar}`}>
             <div>
-                <h1 className={styles.title}>
+                <div className={styles["title-contianer"]}>
+                    <h1 className={styles.title}>
                     EZ Graph
-                </h1>
+                    
+
+                    </h1>
+                    <button className={styles["open-tutorial"]} onClick={handleToggle} > Tutorial </button>
+                </div>
+                
                 <NetworksList 
                     networkNames={networkNames} 
                     toggleNetworkPopUp={toggleNetworkPopUp}
@@ -30,6 +41,7 @@ function Sidebar({ networkNames, toggleNetworkPopUp }) {
                 <RunAlgorithms algorithms={comparisonMethods} />
             </div>
             <Colours />
+            
         </div>
     )
 }
