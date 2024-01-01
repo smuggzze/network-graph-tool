@@ -108,9 +108,15 @@ function AddNetwork({ toggleNetworkPopUp }) {
         }
     }
 
+    const handleClose = () => {
+        toggleNetworkPopUp(false);
+        toggleNetworkPopUp; 
+    };
+
     return (
         <PopUpWrapper>
             <div className={styles.addNetworkPopUp}>
+                <button className={styles.exit} onClick={handleClose}>X</button>
                 <h1 className={styles.title}>Add a network</h1>
                 <div className={styles.wrapper}>
                     <div>
