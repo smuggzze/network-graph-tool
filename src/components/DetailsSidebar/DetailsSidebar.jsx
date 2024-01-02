@@ -13,9 +13,9 @@ function DetailsSidebar({ canvasOffset, setCanvasOffset }) {
 
     return (
         <div className={`sidebar ${styles.detailsSidebar}`} style={canvasOffset != 700 ? { minWidth: '30px' } : {}}>
-            <button className={`side-text ${styles.toggleSidebarButton}`} onClick={toggleDetails}>
+            {/* <button className={`side-text ${styles.toggleSidebarButton}`} onClick={toggleDetails}>
                 {canvasOffset == 700 ? ">>" : "<<"}
-            </button>
+            </button> */}
             {canvasOffset == 700 &&
             <>
                 <GraphDetails />

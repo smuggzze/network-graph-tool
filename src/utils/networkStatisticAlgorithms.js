@@ -58,6 +58,6 @@ export class NetworkStatisticAlgorithms {
         }
         
         const avgDegree = degreeSum / graph.size;
-        return Math.round((avgDegree + Number.EPSILON) * 100) / 100
+        return Math.round((avgDegree + Number.EPSILON) * 100) / 100;
     }
 }

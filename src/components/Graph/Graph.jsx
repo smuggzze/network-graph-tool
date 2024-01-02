@@ -1,7 +1,10 @@
 import ForceGraph2D from 'react-force-graph-2d';
 import styles from "./Graph.module.css";
+import { useRef } from "react";
 
 function Graph({ graph, isLastGraph, width }) {
+    const graphRef = useRef(null);
+
     return (
         <div className={styles.wrapper} data-testid="graph-1" style={!isLastGraph ? { borderRight: '1px solid #C5C5C5' } : {}}>
             <div className={styles.graphOptions}>
@@ -11,6 +14,7 @@ function Graph({ graph, isLastGraph, width }) {
             </div>
             <ForceGraph2D
                 width={width}
+                ref={graphRef}
                 linkWidth={2}
                 linkDirectionalArrowLength={graph.isDirected ? 5 : null}
                 linkCurvature={graph.isDirected ? 0.25 : null}
@@ -33,10 +37,12 @@ function Graph({ graph, isLastGraph, width }) {
                     ctx.fillStyle = '#121212'; // Label color
                     ctx.fillText(label, node.x, node.y);
                 }}
+                cooldownTicks={20}
+                onEngineStop={() => graphRef.current.zoomToFit(600)}
                 graphData={{
                     nodes: graph.nodes,
                     links: graph.links
-                }} 
+                }}
             />
         </div>
     )

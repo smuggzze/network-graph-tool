@@ -22,7 +22,7 @@ test('3 connected components', () => {
         [8, [6, 9]],
         [9, [6]],
     ]);
-
+    
     expect(NetworkStatisticAlgorithms.connectedComponents(graph, true)).toBe(3);
 });
 
