@@ -17,3 +17,9 @@
     gap: 22px;
     flex-direction: column;
 }
+
+.runResultWrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}

@@ -15,16 +15,9 @@
     font-weight: normal;
     font-size: 1.8rem;
 }
-.open-tutorial{
-    background-color: #22BEC8;
-    border-radius: 5px;
-    color:white;
-    border: 0px white;
-      
-}
-.title-contianer{
+
+.title-contianer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 1rem;
 }

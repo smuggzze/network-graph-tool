@@ -8,9 +8,6 @@ function Graph({ graph, isLastGraph, width }) {
                 <button className={`${styles.resetGraph} primary-btn`}>
                     Reset graph
                 </button>
-                <p className={`side-text ${styles.networkName}`}>
-                    {graph.networkName}
-                </p>
             </div>
             <ForceGraph2D
                 width={width}

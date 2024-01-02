@@ -9,9 +9,10 @@ function GraphDetails() {
     return (
         <div className={styles.detailsWrapper} style={{ marginTop: "76px" }}>
             <h2 className="sidebarSubTitle">
-                Graph details
+                Network Details
             </h2>
             <div className={styles.detailPairs}>
+                <GraphDetailsPair label="Network Name" value={graphContext.selectedGraph.networkName} />
                 <GraphDetailsPair label="Nodes" value={graphContext.selectedGraph.nodes.length} />
                 <GraphDetailsPair label="Edges" value={graphContext.selectedGraph.links.length} />
                 <GraphDetailsPair label="Graph Type" value={graphContext.selectedGraph.isDirected ? "Directed" : "Undirected"} />

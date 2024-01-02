@@ -13,11 +13,6 @@
     box-shadow: 0px 0px 5px rgb(202, 202, 202);
 }
 
-.networkName {
-    margin-top: 27px;
-    margin-bottom: 15px;
-}
-
 .graphOptions {
     width: fit-content;
     position: absolute;

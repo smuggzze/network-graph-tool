@@ -22,13 +22,15 @@ function Run({ label, algorithm, isNetworkStatistic }) {
 
     return (
         <div className={styles.runAlgorithm}>
-            <p className={`side-text`}>
+            <p className="side-text">
                 {label}
             </p>
-            {statistic != null && <p>{statistic}</p>}
-            <button className={`${styles.runButton} primary-btn`} onClick={runAlgorithm}>
-                Run
-            </button>
+            <div className={styles.runResultWrapper}>
+                {statistic != null ? <p>{statistic}</p> : isNetworkStatistic && <p>?</p>}
+                <button className={`${styles.runButton} primary-btn`} onClick={runAlgorithm}>
+                    Run
+                </button>
+            </div>
         </div>
     )
 }

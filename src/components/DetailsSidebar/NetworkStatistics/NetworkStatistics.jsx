@@ -15,7 +15,7 @@ function NetworkStatistics() {
     return (
         <div className={styles.detailsWrapper}>
             <h2 className="sidebarSubTitle" style={{ marginTop: "15px" }}>
-                Network statistics
+                Network Statistics
             </h2>
             <RunAlgorithms 
                 algorithms={networkStatistics} 

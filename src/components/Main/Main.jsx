@@ -5,7 +5,7 @@ import DetailsSidebar from "../DetailsSidebar/DetailsSidebar";
 import { useState, createContext, useEffect } from "react";
 import useWindowSize from "../../hooks/useWindowSize";
 import AddNetwork from "../AddNetwork/AddNetwork";
-import TutorialPopup1 from "../TutorialPopup/TutorialPopup1";
+import TutorialPopUp from "../TutorialPopUp/TutorialPopUp";
 
 export const GraphContext = createContext({});
 export const nodeSize = 10;
@@ -18,7 +18,6 @@ function Main() {
     const [graphs, setGraphs] = useState([]);
     const [addTutorialPopUp, setTutorialPopUp] = useState(true);
     
-
     function toggleNetworkPopUp() {
         setAddNetworkPopUp((cur) => !cur);
     }
@@ -35,18 +34,12 @@ function Main() {
 
     return (
         <GraphContext.Provider value={{selectedGraph, setSelectedGraph, graphs, setGraphs}}>
-            {addTutorialPopUp && (
-                <TutorialPopup1
-                    setTutorialPopUp={setTutorialPopUp}
-                    toggleTutorial={toggleTutorial}
-                />
-            )}
+            {addTutorialPopUp && <TutorialPopUp toggleTutorial={toggleTutorial} />}
             {addNetworkPopUp && <AddNetwork toggleNetworkPopUp={toggleNetworkPopUp} />}
             <div className={styles.mainPage}>
                 <Sidebar 
                     networkNames={graphs.map((graph) => graph.networkName)}
                     toggleNetworkPopUp={toggleNetworkPopUp} 
-                    setTutorialPopUp={setTutorialPopUp}
                     toggleTutorial={toggleTutorial}
                 />
                 {selectedGraph != null ?
@@ -73,15 +66,13 @@ function Main() {
                         <p className={styles.noNetworksText}>
                             You currently have no networks to show...
                         </p>
-                        <button className={`${styles.startVisualising} primary-btn`} 
-                        onClick={toggleNetworkPopUp}>
+                        <button className={`${styles.startVisualising} primary-btn`} onClick={toggleNetworkPopUp}>
                             Start Visualising
                         </button>
                     </div>
                 </div>}
             </div>
         </GraphContext.Provider>
-        
     )
 }
 

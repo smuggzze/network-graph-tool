@@ -5,7 +5,7 @@ import Graph from '../Graph/Graph';
 afterEach(cleanup);
 
 test('should render graph component', () => {
-  render(<Graph />);
-  const graphElement = screen.getByTestId('graph-1');
-  expect(graphElement).toBeInTheDocument();
+	render(<Graph />);
+	const graphElement = screen.getByTestId('graph-1');
+	expect(graphElement).toBeInTheDocument();
 });

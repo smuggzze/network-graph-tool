@@ -7,7 +7,7 @@ function NetworksList({ networkNames, toggleNetworkPopUp }) {
     const graphContext = useContext(GraphContext);
 
     function updateSelectedGraph(networkName) {
-        graphContext.setSelectedGraph(graphContext.graphs.find((x) => x.networkName === networkName) || {});
+        graphContext.setSelectedGraph(graphContext.graphs.find((x) => x.networkName === networkName));
     }
 
     return (
