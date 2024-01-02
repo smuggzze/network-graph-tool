@@ -9,7 +9,7 @@ function Run({ label, algorithm, isNetworkStatistic }) {
 
     function runAlgorithm() {
         const graph = convertToAdjList(graphContext.selectedGraph);
-        const result = algorithm(graph);
+        const result = algorithm(graph, graphContext.selectedGraph.isDirected);
         
         if (isNetworkStatistic) {
             setStatistic(result);

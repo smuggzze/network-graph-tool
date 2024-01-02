@@ -7,7 +7,7 @@ test('1 connected component', () => {
         [3, [1]]
     ]);
 
-    expect(NetworkStatisticAlgorithms.connectedComponents(graph)).toBe(1);
+    expect(NetworkStatisticAlgorithms.connectedComponents(graph, true)).toBe(1);
 });
 
 test('3 connected components', () => {
@@ -23,10 +23,10 @@ test('3 connected components', () => {
         [9, [6]],
     ]);
 
-    expect(NetworkStatisticAlgorithms.connectedComponents(graph)).toBe(3);
+    expect(NetworkStatisticAlgorithms.connectedComponents(graph, true)).toBe(3);
 });
 
 test('0 connected components', () => {
     const graph = new Map([]);
-    expect(NetworkStatisticAlgorithms.connectedComponents(graph)).toBe(0);
+    expect(NetworkStatisticAlgorithms.connectedComponents(graph, false)).toBe(0);
 });

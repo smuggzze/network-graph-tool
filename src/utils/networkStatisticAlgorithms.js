@@ -1,24 +1,27 @@
 import { constructUndirectedGraph } from "./constructUndirectedGraph";
 
 export class NetworkStatisticAlgorithms {
-    static avgClusteringCoefficient(graph) {
+    static avgClusteringCoefficient(graph, isDirected) {
 
     }
 
-    static avgPathLength(graph) {
+    static avgPathLength(graph, isDirected) {
 
     }
 
-    static graphDensity(graph) {
+    static graphDensity(graph, isDirected) {
 
     }
 
-    static networkDiameter(graph) {
+    static networkDiameter(graph, isDirected) {
 
     }
 
-    static connectedComponents(graph) {
-        const udGraph = constructUndirectedGraph(graph);
+    static connectedComponents(graph, isDirected) {
+        if (isDirected) {
+            graph = constructUndirectedGraph(graph);
+        }
+
         const visited = new Set();
         let components = 0;
 
@@ -28,7 +31,7 @@ export class NetworkStatisticAlgorithms {
 
             while (queue.length > 0) {
                 const curNode = queue.shift();
-                for (let neighbor of udGraph.get(curNode)) {
+                for (let neighbor of graph.get(curNode)) {
                     if (!visited.has(neighbor)) {
                         visited.add(neighbor);
                         queue.push(neighbor);
@@ -37,7 +40,7 @@ export class NetworkStatisticAlgorithms {
             }
         }
 
-        for (let node of udGraph.keys()) {
+        for (let node of graph.keys()) {
             if (!visited.has(node)) {
                 components++;
                 bfs(node);
