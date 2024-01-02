@@ -48,6 +48,13 @@ export class NetworkStatisticAlgorithms {
     }
 
     static avgDegree(graph) {
+        let degreeSum = 0;
+
+        for (let node of graph.keys()) {
+            degreeSum += graph.get(node).length;
+        }
         
+        const avgDegree = degreeSum / graph.size;
+        return Math.round((avgDegree + Number.EPSILON) * 100) / 100
     }
 }
