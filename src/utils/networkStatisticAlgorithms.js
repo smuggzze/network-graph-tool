@@ -9,8 +9,16 @@ export class NetworkStatisticAlgorithms {
 
     }
 
-    static graphDensity(graph, isDirected) {
+    static graphDensity(graph) {
+        let numEdges = 0;
 
+        for (let key of graph.keys()) { //looping through each node
+            let degree = graph.get(key);
+            numEdges = numEdges + degree.length // adding the edges connected to each node
+        }
+
+        const density = numEdges / (numEdges * (numEdges - 1))
+        return Math.round(density * 100) / 100;
     }
 
     static networkDiameter(graph, isDirected) {
