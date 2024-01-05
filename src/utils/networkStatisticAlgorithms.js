@@ -37,9 +37,9 @@ export class NetworkStatisticAlgorithms {
         const numNodes = graph.size;
         let numEdges = 0;
 
-        for (let node of graph.keys()) { //looping through each node
-            const degree = graph.get(node);
-            numEdges = numEdges + degree.length // adding the edges connected to each node
+        for (let node of graph.keys()) {
+            const degree = graph.get(node).length;
+            numEdges += degree;
         }
 
         const density = numEdges / (numNodes * (numNodes - 1));

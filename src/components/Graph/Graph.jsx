@@ -18,6 +18,11 @@ function Graph({ graph, isLastGraph, width }) {
                 linkWidth={2}
                 linkDirectionalArrowLength={graph.isDirected ? 5 : null}
                 linkCurvature={graph.isDirected ? 0.25 : null}
+                onNodeDragEnd={(node) => {
+                    node.fx = node.x;
+                    node.fy = node.y;
+                    node.fz = node.z;
+                }}
                 nodeCanvasObject={(node, ctx, globalScale) => {
                     const label = node.id;
 
@@ -37,8 +42,6 @@ function Graph({ graph, isLastGraph, width }) {
                     ctx.fillStyle = '#121212'; // Label color
                     ctx.fillText(label, node.x, node.y);
                 }}
-                cooldownTicks={20}
-                onEngineStop={() => graphRef.current.zoomToFit(600)}
                 graphData={{
                     nodes: graph.nodes,
                     links: graph.links
