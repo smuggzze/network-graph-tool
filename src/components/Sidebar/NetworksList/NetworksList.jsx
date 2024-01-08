@@ -6,6 +6,7 @@ import { GraphContext } from "../../Main/Main";
 function NetworksList({ networkNames, toggleNetworkPopUp }) {
     const graphContext = useContext(GraphContext);
 
+    // Updates the selected graph to the graph that the user selected.
     function updateSelectedGraph(networkName) {
         graphContext.setSelectedGraph(graphContext.graphs.find((x) => x.networkName === networkName));
     }

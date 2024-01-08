@@ -1,4 +1,7 @@
 
+// Constructs an undirected graph from a directed graph
+// by converting a single directional edge from node U to node V
+// into a bidirectional edge U <--> V.
 export function constructUndirectedGraph(directedGraph) {
     const udGraph = new Map();
 

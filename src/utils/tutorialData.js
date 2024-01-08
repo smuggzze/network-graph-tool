@@ -1,3 +1,5 @@
+
+// Contains information for each tutorial page.
 export const tutorialData = [
     {
         title: "Welcome to the tutorial!",

@@ -3,6 +3,8 @@ import NetworksList from "./NetworksList/NetworksList";
 import RunAlgorithms from "../RunAlgorithms/RunAlgorithms";
 import Colours from "./Colours/Colours";
 
+// Object that is used by the UI to run the associated network comparison algorithm when the
+// 'run' button is clicked by the user.
 const comparisonMethods = Object.freeze({
     "Degree Centrality": () => {},
     "Betweenness Centrality": () => {},

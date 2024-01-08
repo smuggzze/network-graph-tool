@@ -6,12 +6,14 @@ import { tutorialData } from "../../utils/tutorialData";
 function TutorialPopUp({ toggleTutorial }) {
     const [currentPage, setCurrentPage] = useState(0);
 
+    // Sets the current page back to the previous page in the tutorial.
     function handleBack() {
         if (currentPage > 0) {
             setCurrentPage(currentPage - 1);
         }
     }
     
+    // Sets the current page to the next page in the tutorial.
     function handleForward() {
         if (currentPage < tutorialData.length - 1) {
             setCurrentPage(currentPage + 1);

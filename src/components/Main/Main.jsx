@@ -7,7 +7,9 @@ import useWindowSize from "../../hooks/useWindowSize";
 import AddNetwork from "../AddNetwork/AddNetwork";
 import TutorialPopUp from "../TutorialPopUp/TutorialPopUp";
 
+// Will be used to allow all child components to access the graph data.
 export const GraphContext = createContext({});
+// The size of each node in the graph visualisation.
 export const nodeSize = 10;
 
 function Main() {
@@ -18,15 +20,19 @@ function Main() {
     const [graphs, setGraphs] = useState([]);
     const [addTutorialPopUp, setTutorialPopUp] = useState(true);
     
+    // Toggles the 'Add Network' pop up window in the UI.
     function toggleNetworkPopUp() {
         setAddNetworkPopUp((cur) => !cur);
     }
 
+    // Toggles the tutorial pop up window in the UI.
     function toggleTutorial() {
         setTutorialPopUp((cur) => !cur);
     }
 
     useEffect(() => {
+        // If no graph is selected and the user has at least one graph uploaded, 
+        // then automatically choose the first graph. Runs when a graph is added or deleted.
         if (selectedGraph == null && graphs.length > 0) {
             setSelectedGraph(graphs[0]);
         }

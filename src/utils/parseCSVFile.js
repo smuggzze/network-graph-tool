@@ -1,5 +1,8 @@
 import Papa from "papaparse";
 
+// Reads in a CSV file given the file object 'file'
+// and returns a nested list representing the filled cells in
+// the CSV file.
 export function parseCSVFile(file) {
     return new Promise((resolve, reject) => {
         if (!file) {
