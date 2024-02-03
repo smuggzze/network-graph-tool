@@ -17,7 +17,6 @@ export class NetworkStatisticAlgorithms {
 
             // The number of edges between neighbours of 'node'.
             let links = 0;
-
             for (let n1 of neighbours) {
                 for (let n2 of graph.get(n1)) {
                     if (neighbours.has(n2)) {
@@ -36,8 +35,48 @@ export class NetworkStatisticAlgorithms {
         return Math.round((avgClusteringCo + Number.EPSILON) * 1000) / 1000;
     }
 
-    static avgPathLength(graph, isDirected) {
-        
+    static avgPathLength(graph) {
+        let componentCount = 0;
+        let sumLengths = 0;
+        const visited = new Set();
+
+        function getAvgLength(nodes) {
+            let numPaths = 0;
+            let sumPaths = 0;
+
+            for (let node of nodes) {
+                const queue = [[node, 0]];
+                const curVisited = new Set();
+                curVisited.add(node);
+
+                while (queue.length > 0) {
+                    const [curNode, dist] = queue.shift();
+
+                    for (let neighbour of graph.get(curNode)) {
+                        if (!curVisited.has(neighbour)) {
+                            // Mark node as visited and add to queue so it can be processed next.
+                            curVisited.add(neighbour);
+                            queue.push([neighbour, dist + 1]);
+                            sumPaths += dist + 1;
+                            numPaths++;
+                        }
+                    }
+                }
+            }
+
+            return numPaths === 0 ? 0 : sumPaths / numPaths;
+        }
+
+        for (let node of graph.keys()) {
+            if (!visited.has(node)) {
+                const nodes = NetworkStatisticAlgorithms.visitComponent(node, visited, graph);
+                sumLengths += getAvgLength(nodes);
+                componentCount++;
+            }
+        }
+
+        const avg = sumLengths / componentCount;
+        return Math.round((avg + Number.EPSILON) * 1000) / 1000;
     }
 
     // Determines the density of the graph by calculating
@@ -57,8 +96,62 @@ export class NetworkStatisticAlgorithms {
         return Math.round((density + Number.EPSILON) * 1000) / 1000;
     }
 
-    static networkDiameter(graph, isDirected) {
+    // Calculates the longest shortest path between all pairs
+    // of nodes in the graph. This determines the 'diameter' of the
+    // graph.
+    static networkDiameter(graph) {
+        let diameter = 0;
 
+        function findBestDiameter(node) {
+            const queue = [[node, 0]];
+            let bestDiameter = 0;
+
+            const visited = new Set();
+            visited.add(node);
+
+            while (queue.length > 0) {
+                const [curNode, dist] = queue.shift();
+                bestDiameter = Math.max(bestDiameter, dist);
+
+                for (let neighbour of graph.get(curNode)) {
+                    if (!visited.has(neighbour)) {
+                        // Mark node as visited and add to queue so it can be processed next.
+                        visited.add(neighbour);
+                        queue.push([neighbour, dist + 1]);
+                    }
+                }
+            }
+
+            return bestDiameter;
+        }
+
+        for (let node of graph.keys()) {
+            const bestDiameter = findBestDiameter(node);
+            diameter = Math.max(diameter, bestDiameter);
+        }
+
+        return diameter;
+    }
+
+    // Visits the component of the graph by marking each node as visited.
+    static visitComponent(node, visited, graph) {
+        const queue = [node];
+        const nodes = [node];
+        visited.add(node);
+
+        while (queue.length > 0) {
+            const curNode = queue.shift();
+            for (let neighbour of graph.get(curNode)) {
+                if (!visited.has(neighbour)) {
+                    // Mark node as visited and add to queue so it can be processed next.
+                    visited.add(neighbour);
+                    queue.push(neighbour);
+                    nodes.push(neighbour);
+                }
+            }
+        }
+
+        return nodes;
     }
 
     // Computes the number of connected components within the graph
@@ -74,28 +167,11 @@ export class NetworkStatisticAlgorithms {
         // Number of connected components within the graph.
         let components = 0;
 
-        // Visits all nodes within a graph component to ensure that they are not visited again.
-        function bfs(node) {
-            const queue = [node];
-            visited.add(node);
-
-            while (queue.length > 0) {
-                const curNode = queue.shift();
-                for (let neighbour of graph.get(curNode)) {
-                    if (!visited.has(neighbour)) {
-                        // Mark node as visited and add to queue so it can be processed next.
-                        visited.add(neighbour);
-                        queue.push(neighbour);
-                    }
-                }
-            }
-        }
-
         for (let node of graph.keys()) {
             // If this is a new component, explore it.
             if (!visited.has(node)) {
+                NetworkStatisticAlgorithms.visitComponent(node, visited, graph);
                 components++;
-                bfs(node);
             }
         }
 

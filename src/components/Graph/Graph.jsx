@@ -8,7 +8,7 @@ function Graph({ graph, isLastGraph, width }) {
     return (
         <div className={styles.wrapper} data-testid="graph-1" style={!isLastGraph ? { borderRight: '1px solid #C5C5C5' } : {}}>
             <div className={styles.graphOptions}>
-                <button className={`${styles.resetGraph} primary-btn`}>
+                <button className={`${styles.resetGraph} primaryBtn`}>
                     Reset graph
                 </button>
             </div>

@@ -22,7 +22,7 @@ function Colours() {
             <div className={styles.dropdownWrapper}>
                 {Object.keys(graphColours[option]).map((key) => {
                     return (
-                        <div key={key} className={`side-text ${styles.dropdownOption}`}>
+                        <div key={key} className={`sideText ${styles.dropdownOption}`}>
                             {key}
                             <span className={styles.colourCircle} style={{ backgroundColor: graphColours[option][key] }}>
                             </span>

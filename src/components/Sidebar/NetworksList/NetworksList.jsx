@@ -3,7 +3,7 @@ import styles from "./NetworksList.module.css";
 import { useContext } from "react";
 import { GraphContext } from "../../Main/Main";
 
-function NetworksList({ networkNames, toggleNetworkPopUp }) {
+function NetworksList({ networkNames, setAddNetworkPopUp }) {
     const graphContext = useContext(GraphContext);
 
     // Updates the selected graph to the graph that the user selected.
@@ -27,7 +27,7 @@ function NetworksList({ networkNames, toggleNetworkPopUp }) {
                 )
             })}
             {networkNames.length < 2 &&
-            <button className={styles.addNetwork} onClick={toggleNetworkPopUp}>
+            <button className={styles.addNetwork} onClick={() => setAddNetworkPopUp(true)}>
                 + Add a network
             </button>}
         </>

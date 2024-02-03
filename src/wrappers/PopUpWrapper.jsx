@@ -1,8 +1,15 @@
 
-function PopUpWrapper({ children }) {
+function PopUpWrapper({ children, setPopUp }) {
+    function closePopUp() {
+        setPopUp(false);
+    }
+
     return (
         <div className="popUpWrapper">
-            {children}
+            <div className="popUp">
+                <button className="exitBtn" onClick={closePopUp}>X</button>
+                {children}
+            </div>
         </div>
     )
 }

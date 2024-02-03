@@ -19,16 +19,6 @@ function Main() {
     const [addNetworkPopUp, setAddNetworkPopUp] = useState(false);
     const [graphs, setGraphs] = useState([]);
     const [addTutorialPopUp, setTutorialPopUp] = useState(true);
-    
-    // Toggles the 'Add Network' pop up window in the UI.
-    function toggleNetworkPopUp() {
-        setAddNetworkPopUp((cur) => !cur);
-    }
-
-    // Toggles the tutorial pop up window in the UI.
-    function toggleTutorial() {
-        setTutorialPopUp((cur) => !cur);
-    }
 
     useEffect(() => {
         // If no graph is selected and the user has at least one graph uploaded, 
@@ -40,13 +30,13 @@ function Main() {
 
     return (
         <GraphContext.Provider value={{selectedGraph, setSelectedGraph, graphs, setGraphs}}>
-            {addTutorialPopUp && <TutorialPopUp toggleTutorial={toggleTutorial} />}
-            {addNetworkPopUp && <AddNetwork toggleNetworkPopUp={toggleNetworkPopUp} />}
+            {addTutorialPopUp && <TutorialPopUp setTutorialPopUp={setTutorialPopUp} />}
+            {addNetworkPopUp && <AddNetwork setAddNetworkPopUp={setAddNetworkPopUp} />}
             <div className={styles.mainPage}>
                 <Sidebar 
                     networkNames={graphs.map((graph) => graph.networkName)}
-                    toggleNetworkPopUp={toggleNetworkPopUp} 
-                    toggleTutorial={toggleTutorial}
+                    setAddNetworkPopUp={setAddNetworkPopUp} 
+                    setTutorialPopUp={setTutorialPopUp}
                 />
                 {selectedGraph != null ?
                 <>
@@ -72,7 +62,7 @@ function Main() {
                         <p className={styles.noNetworksText}>
                             You currently have no networks to show...
                         </p>
-                        <button className={`${styles.startVisualising} primary-btn`} onClick={toggleNetworkPopUp}>
+                        <button className={`${styles.startVisualising} primaryBtn`} onClick={() => setAddNetworkPopUp(true)}>
                             Start Visualising
                         </button>
                     </div>

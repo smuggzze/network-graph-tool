@@ -17,7 +17,7 @@
     font-size: 1.8rem;
 }
 
-.title-contianer {
+.titleContianer {
     display: flex;
     justify-content: space-between;
     align-items: center;

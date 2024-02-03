@@ -8,7 +8,7 @@ import { filterEdges } from "../../utils/filterEdges";
 import { nodeTypes } from "../../utils/nodeTypes";
 import { graphTypes } from "../../utils/graphTypes";
 
-function AddNetwork({ toggleNetworkPopUp }) {
+function AddNetwork({ setAddNetworkPopUp }) {
     const graphContext = useContext(GraphContext);
     const [nodeList, setNodeList] = useState([]);
     const [edgeList, setEdgeList] = useState([]);
@@ -69,7 +69,7 @@ function AddNetwork({ toggleNetworkPopUp }) {
         // Pass filtered nodes and edges to 'createGraph' function for creation.
         createGraph(filteredNodes, filteredEdges);
         // Close 'Add Network' pop up window.
-        toggleNetworkPopUp();
+        setAddNetworkPopUp(false);
     }
 
     // Creates a new graph using the filtered nodes and edges
@@ -125,91 +125,83 @@ function AddNetwork({ toggleNetworkPopUp }) {
         }
     }
 
-    // Closes the 'Add Network' pop up.
-    function closeNetworkPopUp() {
-        toggleNetworkPopUp(false);
-    }
-
     return (
-        <PopUpWrapper>
-            <div className={styles.addNetworkPopUp}>
-                <button className={styles.exit} onClick={closeNetworkPopUp}>X</button>
-                <h1 className={styles.title}>Add a network</h1>
-                <div className={styles.wrapper}>
-                    <div>
-                        <div className={styles.fileUpload}>
-                            <p>Node list:</p>
-                            <input 
-                                type="file" 
-                                accept=".csv"
-                                onChange={uploadNodeList} 
-                                hidden={true} 
-                                ref={nodeListFileRef} 
-                            />
-                            {nodeListFileName !== "" && 
-                            <p className={`side-text ${styles.fileName}`}>
-                                {nodeListFileName}
-                            </p>}
-                            <button className={`${styles.uploadFileBtn} primary-btn`} 
-                            onClick={() => nodeListFileRef.current.click()}>
-                                Upload a file
-                            </button>
-                        </div>
-                        <p className={styles.type}>Node ID Type:</p>
-                        <select className={styles.typeDropdown} onChange={updateNodeIDType} defaultValue={nodeTypes.Integer}>
-                            {Object.keys(nodeTypes).map((type, index) => {
-                                return (
-                                    <option value={type} key={index}>
-                                        {type}
-                                    </option>
-                                )
-                            })}
-                        </select>
+        <PopUpWrapper setPopUp={setAddNetworkPopUp}>
+            <h1 className={styles.title}>Add a network</h1>
+            <div className={styles.wrapper}>
+                <div>
+                    <div className={styles.fileUpload}>
+                        <p>Node list:</p>
+                        <input 
+                            type="file" 
+                            accept=".csv"
+                            onChange={uploadNodeList} 
+                            hidden={true} 
+                            ref={nodeListFileRef} 
+                        />
+                        {nodeListFileName !== "" && 
+                        <p className={`sideText ${styles.fileName}`}>
+                            {nodeListFileName}
+                        </p>}
+                        <button className={`${styles.uploadFileBtn} primaryBtn`} 
+                        onClick={() => nodeListFileRef.current.click()}>
+                            Upload a file
+                        </button>
                     </div>
-                    <div>
-                        <div className={styles.fileUpload}>
-                            <p>Edge list:</p>
-                            <input 
-                                type="file" 
-                                accept=".csv"
-                                onChange={uploadEdgeList} 
-                                hidden={true} 
-                                ref={edgeListFileRef} 
-                            />
-                            {edgeListFileName !== "" && 
-                            <p className={`side-text ${styles.fileName}`}>
-                                {edgeListFileName}
-                            </p>}
-                            <button className={`${styles.uploadFileBtn} primary-btn`}
-                            onClick={() => edgeListFileRef.current.click()}>
-                                Upload a file
-                            </button>
-                        </div>
-                        <p className={styles.type}>Graph Type:</p>
-                        <select className={styles.typeDropdown} onChange={updateGraphType} defaultValue={graphTypes.Directed}>
-                            {Object.keys(graphTypes).map((type, index) => {
-                                return (
-                                    <option value={type} key={index}>
-                                        {type}
-                                    </option>
-                                )
-                            })}
-                        </select>
-                    </div>
+                    <p className={styles.type}>Node ID Type:</p>
+                    <select className={styles.typeDropdown} onChange={updateNodeIDType} defaultValue={nodeTypes.Integer}>
+                        {Object.keys(nodeTypes).map((type, index) => {
+                            return (
+                                <option value={type} key={index}>
+                                    {type}
+                                </option>
+                            )
+                        })}
+                    </select>
                 </div>
-                <p className={`${styles.networkName} ${styles.type}`}>
-                    Network name:
-                </p>
-                <input 
-                    type="text" 
-                    className={styles.networkNameInput} 
-                    placeholder="E.g. LinkedIn network" 
-                    onChange={updateNetworkName}
-                />
-                <button className={`${styles.visualiseNetwork} primary-btn`} onClick={visualiseNetwork}>
-                    Visualise Network
-                </button>
+                <div>
+                    <div className={styles.fileUpload}>
+                        <p>Edge list:</p>
+                        <input 
+                            type="file" 
+                            accept=".csv"
+                            onChange={uploadEdgeList} 
+                            hidden={true} 
+                            ref={edgeListFileRef} 
+                        />
+                        {edgeListFileName !== "" && 
+                        <p className={`sideText ${styles.fileName}`}>
+                            {edgeListFileName}
+                        </p>}
+                        <button className={`${styles.uploadFileBtn} primaryBtn`}
+                        onClick={() => edgeListFileRef.current.click()}>
+                            Upload a file
+                        </button>
+                    </div>
+                    <p className={styles.type}>Graph Type:</p>
+                    <select className={styles.typeDropdown} onChange={updateGraphType} defaultValue={graphTypes.Directed}>
+                        {Object.keys(graphTypes).map((type, index) => {
+                            return (
+                                <option value={type} key={index}>
+                                    {type}
+                                </option>
+                            )
+                        })}
+                    </select>
+                </div>
             </div>
+            <p className={`${styles.networkName} ${styles.type}`}>
+                Network name:
+            </p>
+            <input 
+                type="text" 
+                className={styles.networkNameInput} 
+                placeholder="E.g. LinkedIn network" 
+                onChange={updateNetworkName}
+            />
+            <button className={`${styles.visualiseNetwork} primaryBtn`} onClick={visualiseNetwork}>
+                Visualise Network
+            </button>
         </PopUpWrapper>
     )
 }
