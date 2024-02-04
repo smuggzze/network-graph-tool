@@ -23,7 +23,7 @@ function Sidebar({ networkNames, setAddNetworkPopUp, setTutorialPopUp }) {
                     <h1 className={styles.title}>
                         EZ Graph
                     </h1>
-                    <button className="primaryBtn" onClick={() => setTutorialPopUp((cur) => !cur)}>
+                    <button className={`${styles.tutorialBtn} primaryBtn`} onClick={() => setTutorialPopUp((cur) => !cur)}>
                         Tutorial
                     </button>
                 </div>

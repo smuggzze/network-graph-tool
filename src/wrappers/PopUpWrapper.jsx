@@ -1,5 +1,6 @@
+import styles from "./PopUpWrapper.module.css";
 
-function PopUpWrapper({ children, setPopUp }) {
+function PopUpWrapper({ children, setPopUp, title }) {
     function closePopUp() {
         setPopUp(false);
     }
@@ -7,7 +8,8 @@ function PopUpWrapper({ children, setPopUp }) {
     return (
         <div className="popUpWrapper">
             <div className="popUp">
-                <button className="exitBtn" onClick={closePopUp}>X</button>
+                <button className={styles.exitBtn} onClick={closePopUp}>X</button>
+                <h1 className={styles.title}>{title}</h1>
                 {children}
             </div>
         </div>

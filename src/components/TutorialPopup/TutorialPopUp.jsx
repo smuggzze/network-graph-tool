@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PopUpWrapper from "../../wrappers/PopUpWrapper";
 import { tutorialData } from "../../utils/tutorialData";
+import styles from "./TutorialPopup.module.css";
 
 function TutorialPopUp({ setTutorialPopUp }) {
     const [currentPage, setCurrentPage] = useState(0);
@@ -20,27 +21,25 @@ function TutorialPopUp({ setTutorialPopUp }) {
     }
 
     return (
-        <PopUpWrapper setPopUp={setTutorialPopUp}>
-            <h1>{tutorialData[currentPage].title}</h1>
+        <PopUpWrapper setPopUp={setTutorialPopUp} title={tutorialData[currentPage].title}>
             <div>
                 <iframe
                     src={tutorialData[currentPage].videoLink}
+                    className={styles.videoLink}
                     title="Tutorial Video"
                     allow="autoplay; encrypted-media"
                     allowFullScreen
                 ></iframe>
             </div>
-            <div>
-                <p>
-                    {tutorialData[currentPage].text}
-                </p>
+            <p className={styles.description}>{tutorialData[currentPage].text}</p>
+            <div className={styles.btnWrapper}>
+                <button className={`${styles.btn} primaryBtn`} onClick={handleBack}>
+                    Back
+                </button>
+                <button className={`${styles.btn} primaryBtn`} onClick={handleForward}>
+                    Forward
+                </button>
             </div>
-            <button className={`primaryBtn`} onClick={handleBack}>
-                back
-            </button>
-            <button className={`primaryBtn`} onClick={handleForward}>
-                Forward
-            </button>
         </PopUpWrapper>
     );
 }

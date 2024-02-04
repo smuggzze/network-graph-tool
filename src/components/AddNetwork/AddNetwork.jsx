@@ -43,6 +43,11 @@ function AddNetwork({ setAddNetworkPopUp }) {
         setNetworkName(name);
     }
 
+    function validInputs() {
+        return nodeList.length > 0 && edgeList.length > 0 && networkName !== "" &&
+        !graphContext.graphs.map((graph) => graph.networkName).includes(networkName);
+    }
+
     // Filters the list of nodes and edges inputted by the user and
     // runs error checking logic to ensure that the inputs are valid.
     // Creates a graph using the filtered nodes and edges.
@@ -126,8 +131,7 @@ function AddNetwork({ setAddNetworkPopUp }) {
     }
 
     return (
-        <PopUpWrapper setPopUp={setAddNetworkPopUp}>
-            <h1 className={styles.title}>Add a network</h1>
+        <PopUpWrapper setPopUp={setAddNetworkPopUp} title="Add a network">
             <div className={styles.wrapper}>
                 <div>
                     <div className={styles.fileUpload}>
@@ -140,7 +144,7 @@ function AddNetwork({ setAddNetworkPopUp }) {
                             ref={nodeListFileRef} 
                         />
                         {nodeListFileName !== "" && 
-                        <p className={`sideText ${styles.fileName}`}>
+                        <p className="sideText">
                             {nodeListFileName}
                         </p>}
                         <button className={`${styles.uploadFileBtn} primaryBtn`} 
@@ -170,7 +174,7 @@ function AddNetwork({ setAddNetworkPopUp }) {
                             ref={edgeListFileRef} 
                         />
                         {edgeListFileName !== "" && 
-                        <p className={`sideText ${styles.fileName}`}>
+                        <p className="sideText">
                             {edgeListFileName}
                         </p>}
                         <button className={`${styles.uploadFileBtn} primaryBtn`}
@@ -199,7 +203,7 @@ function AddNetwork({ setAddNetworkPopUp }) {
                 placeholder="E.g. LinkedIn network" 
                 onChange={updateNetworkName}
             />
-            <button className={`${styles.visualiseNetwork} primaryBtn`} onClick={visualiseNetwork}>
+            <button className={`${styles.visualiseNetwork} ${!validInputs() ? "disabledBtn" : ""} primaryBtn`} onClick={visualiseNetwork}>
                 Visualise Network
             </button>
         </PopUpWrapper>

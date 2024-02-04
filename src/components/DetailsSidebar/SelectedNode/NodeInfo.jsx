@@ -7,7 +7,7 @@ function NodeInfo({ label, value }) {
                 <p className="sideText">{label}</p>
             </div>
             <div className={styles.valueBox}>
-                <p>{value}</p>
+                <p style={{ wordBreak: "break-all" }}>{value}</p>
             </div>
         </div>
     )

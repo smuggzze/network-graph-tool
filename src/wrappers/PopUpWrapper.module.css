@@ -1,0 +1,18 @@
+.title {
+    font-size: 23px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.exitBtn {
+    width: 30px;
+    height: 30px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    display: block;
+    margin-left: auto;
+    margin-bottom: 20px;
+    cursor: pointer;
+}

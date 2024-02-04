@@ -7,22 +7,16 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    cursor: pointer;
+}
+
+.removeBtn {
+    background-color: rgb(228, 49, 49);
+    height: 24px;
+    color: white;
 }
 
 .removeBtn:hover {
     background-color: rgb(233, 65, 65);
-}
-
-.listItem > p {
-    font-size: 1rem;
-}
-
-.listItem > button {
-    background-color: rgb(228, 49, 49);
-    font-size: 0.9rem;
-    height: 24px;
-    color: white;
 }
 
 .addNetwork {

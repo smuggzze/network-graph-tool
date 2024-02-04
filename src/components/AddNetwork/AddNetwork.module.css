@@ -6,12 +6,6 @@
     box-shadow: 0px 0px 10px gray;
 }
 
-.title {
-    font-size: 23px;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
 .fileUpload {
     display: flex;
     align-items: center;
@@ -32,7 +26,6 @@
     border: 1px solid #929292;
     border-radius: 5px;
     width: 100%;
-    font-size: 0.9rem;
     height: 25px;
 }
 
@@ -44,12 +37,7 @@
 }
 
 .uploadFileBtn {
-    font-size: 0.9rem;
-    height: 22px;
-}
-
-.fileName {
-    font-size: 0.9rem;
+    height: 24px;
 }
 
 .networkName {

@@ -19,6 +19,7 @@ function Main() {
     const [addNetworkPopUp, setAddNetworkPopUp] = useState(false);
     const [graphs, setGraphs] = useState([]);
     const [addTutorialPopUp, setTutorialPopUp] = useState(true);
+    const [selectedNode, setSelectedNode] = useState(null);
 
     useEffect(() => {
         // If no graph is selected and the user has at least one graph uploaded, 
@@ -47,6 +48,8 @@ function Main() {
                                     graph={graph}
                                     isLastGraph={index == graphs.length - 1}
                                     width={(windowSize - canvasOffset - 30) / graphs.length}
+                                    selectedNode={selectedNode}
+                                    setSelectedNode={setSelectedNode}
                                     key={graph.networkName}
                                 />
                             )
@@ -55,6 +58,7 @@ function Main() {
                     <DetailsSidebar
                         canvasOffset={canvasOffset} 
                         setCanvasOffset={setCanvasOffset} 
+                        selectedNode={selectedNode}
                     />
                 </> :
                 <div className={styles.noNetworksFound}>

@@ -5,7 +5,7 @@ import { NetworkStatisticAlgorithms } from "../../../utils/networkStatisticAlgor
 // Object that is used by the UI to run the associated network statistic algorithm when the
 // 'run' button is clicked by the user.
 const networkStatistics = Object.freeze({
-    "Avg. Clustering Coefficient": NetworkStatisticAlgorithms.avgClusteringCoefficient,
+    "Avg. Clustering Co.": NetworkStatisticAlgorithms.avgClusteringCoefficient,
     "Avg. Path Length": NetworkStatisticAlgorithms.avgPathLength,
     "Graph Density": NetworkStatisticAlgorithms.graphDensity,
     "Network Diameter": NetworkStatisticAlgorithms.networkDiameter,

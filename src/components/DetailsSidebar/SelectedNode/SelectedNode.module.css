@@ -5,17 +5,17 @@
 }
 
 .labelBox {
-    padding-top: 9px;
-    padding-bottom: 9px;
+    padding-top: 13px;
+    padding-bottom: 13px;
     border-bottom: 1px solid #C5C5C5;
     border-right: 1px solid #C5C5C5;
-    width: 70%;
+    width: 50%;
 }
 
 .valueBox {
-    padding-top: 9px;
-    padding-bottom: 9px;
+    padding-top: 13px;
+    padding-bottom: 13px;
     border-bottom: 1px solid #C5C5C5;
-    width: 30%;
+    width: 50%;
     padding-left: 9px;
 }
