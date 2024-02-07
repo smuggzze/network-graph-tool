@@ -18,13 +18,14 @@ function SelectedNode({ selectedNode }) {
             const graph = convertToAdjList(graphContext.selectedGraph);
             const neighbours = graph.get(selectedNode.id);
 
-            setClusteringCo(nodeStatisticAlgorithms.clusteringCoefficient(selectedNode.id, graph));
-            setInDegree(nodeStatisticAlgorithms.inDegree(selectedNode.id, graph, graphContext.selectedGraph.isDirected));
-            setOutDegree(neighbours.length);
-            setNeighbours(neighbours);
-            setNodeID(selectedNode.id);
+            if (neighbours != null) {
+                setClusteringCo(nodeStatisticAlgorithms.clusteringCoefficient(selectedNode.id, graph));
+                setInDegree(nodeStatisticAlgorithms.inDegree(selectedNode.id, graph, graphContext.selectedGraph.isDirected));
+                setOutDegree(neighbours.length);
+                setNeighbours(neighbours);
+                setNodeID(selectedNode.id);
+            }
         }
-
     }, [graphContext.selectedGraph, selectedNode]);
 
     useEffect(() => {

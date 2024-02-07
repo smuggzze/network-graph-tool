@@ -1,6 +1,6 @@
 
 // Converts the graph structure used by the 'React-Force-Graph' library
-// into an adjacency list to allow for searching algorithm such as Depth-First search
+// into an adjacency list to allow for traversal algorithms such as Depth-First search
 // and Breadth-First search to be performed.
 export function convertToAdjList(graph) {
     // New adjacency list structure.

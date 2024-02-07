@@ -1,12 +1,31 @@
 import ForceGraph2D from 'react-force-graph-2d';
 import styles from "./Graph.module.css";
-import { useRef } from "react";
+import { GraphContext } from '../Main/Main';
+import { useRef, useContext, useState } from "react";
+
+const dagModes = Object.freeze({
+    "Top-Down": "td",
+    "Bottom-Up": "bu",
+    "Left-Right": "lr",
+    "Right-Left": "rl",
+    "Radial-In": "radialin",
+    "Radial-Out": "radialout",
+    "None": null
+});
 
 function Graph({ graph, isLastGraph, width, selectedNode, setSelectedNode }) {
+    const [dagMode, setDagMode] = useState(null);
+    const graphContext = useContext(GraphContext);
     const graphRef = useRef(null);
 
     function handleNodeClick(node) {
+        graphContext.setSelectedGraph(graph);
         setSelectedNode(node);
+    }
+
+    function updateDagMode(e) {
+        const mode = e.target.value;
+        setDagMode(dagModes[mode]);
     }
 
     function handleNodeDrag(node) {
@@ -42,6 +61,18 @@ function Graph({ graph, isLastGraph, width, selectedNode, setSelectedNode }) {
                 <button className={`${styles.resetGraph} primaryBtn`}>
                     Reset graph
                 </button>
+                <div>
+                    <p>Graph style:</p>
+                    <select defaultValue="None" onChange={updateDagMode}>
+                        {Object.keys(dagModes).map((mode, index) => {
+                            return (
+                                <option key={index} value={mode}>
+                                    {mode}
+                                </option>
+                            )
+                        })}
+                    </select>
+                </div>
             </div>
             <ForceGraph2D
                 width={width}
@@ -52,6 +83,9 @@ function Graph({ graph, isLastGraph, width, selectedNode, setSelectedNode }) {
                 linkCurvature={0.20}
                 onNodeDragEnd={handleNodeDrag}
                 onNodeClick={handleNodeClick}
+                cooldownTicks={100}
+                onEngineStop={() => graphRef.current.zoomToFit(400)}
+                dagMode={dagMode}
                 graphData={{
                     nodes: graph.nodes,
                     links: graph.links

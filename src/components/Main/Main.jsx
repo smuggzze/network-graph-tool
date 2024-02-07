@@ -10,14 +10,14 @@ import TutorialPopUp from "../TutorialPopUp/TutorialPopUp";
 // Will be used to allow all child components to access the graph data.
 export const GraphContext = createContext({});
 // The size of each node in the graph visualisation.
-export const nodeSize = 10;
+export const nodeSize = 6;
 
 function Main() {
     const windowSize = useWindowSize();
     const [selectedGraph, setSelectedGraph] = useState(null);
     const [canvasOffset, setCanvasOffset] = useState(700);
     const [addNetworkPopUp, setAddNetworkPopUp] = useState(false);
-    const [graphs, setGraphs] = useState([]);
+    const [graphs, setGraphs] = useState(JSON.parse(localStorage.getItem("graphs")) || []);
     const [addTutorialPopUp, setTutorialPopUp] = useState(true);
     const [selectedNode, setSelectedNode] = useState(null);
 
@@ -28,6 +28,8 @@ function Main() {
             setSelectedGraph(graphs[0]);
         }
     }, [graphs, selectedGraph]);
+
+    console.log(graphs);
 
     return (
         <GraphContext.Provider value={{selectedGraph, setSelectedGraph, graphs, setGraphs}}>

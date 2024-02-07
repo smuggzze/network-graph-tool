@@ -7,6 +7,7 @@ import { parseCSVFile } from "../../utils/parseCSVFile";
 import { filterEdges } from "../../utils/filterEdges";
 import { nodeTypes } from "../../utils/nodeTypes";
 import { graphTypes } from "../../utils/graphTypes";
+import { graphIsAcyclic } from "../../utils/graphIsAcyclic";
 
 function AddNetwork({ setAddNetworkPopUp }) {
     const graphContext = useContext(GraphContext);
@@ -80,12 +81,25 @@ function AddNetwork({ setAddNetworkPopUp }) {
     // Creates a new graph using the filtered nodes and edges
     // from the CSV files and updates the state.
     function createGraph(nodes, edges) {
-        const newGraph = {
-            nodes: nodes.map((node) => { return { id: node, size: nodeSize } }),
+        const nodeArr = nodes.map((node) => { return { id: node, size: nodeSize } });
+        const nodeMap = new Map(nodeArr.map(pair => [pair.id, pair]));
+        const edgeObjects = edges.map((edge) => { return { source: nodeMap.get(edge[0]), target: nodeMap.get(edge[1]) }});
+
+        const graph = {
+            nodes: nodeArr,
             links: edges.map((edge) => { return { source: edge[0], target: edge[1] }}),
-            networkName: networkName,
-            isDirected: graphType === graphTypes.Directed
+            isDirected: graphType === graphTypes.Directed,
+            networkName: networkName
         };
+
+        const newGraph = {
+            ...graph,
+            isDAG: graphType === graphTypes.Directed && graphIsAcyclic({ ...graph, links: edgeObjects })
+        };
+
+        // Update graphs in local storage session.
+        const graphs = JSON.parse(localStorage.getItem("graphs")) || [];
+        localStorage.setItem("graphs", JSON.stringify([...graphs, newGraph]));
 
         // Adds the new graph to the list of graphs.
         graphContext.setGraphs((graphs) => {
@@ -105,8 +119,8 @@ function AddNetwork({ setAddNetworkPopUp }) {
 
         try {
             const nodes = await parseCSVFile(file);
-            setNodeList(nodes);
             setNodeListFileName(file.name);
+            setNodeList(nodes);
         }
         catch (error) {
             console.log(error);
@@ -122,8 +136,8 @@ function AddNetwork({ setAddNetworkPopUp }) {
 
         try {
             const edges = await parseCSVFile(file);
-            setEdgeList(edges);
             setEdgeListFileName(file.name);
+            setEdgeList(edges);
         }
         catch (error) {
             console.log(error);

@@ -7,6 +7,10 @@ function NetworkListItem({ networkName, updateSelectedGraph, isSelected }) {
 
     // Removes the network from the user's list of networks.
     function removeGraph() {
+        // Updates local storage to match current state.
+        const graphs = JSON.parse(localStorage.getItem("graphs")) || [];
+        localStorage.setItem("graphs", JSON.stringify(graphs.filter((graph) => graph.networkName !== networkName)));
+
         // Updates graph list state by filtering graphs by name.
         graphContext.setGraphs((cur) => cur.filter((x) => x.networkName !== networkName));
 

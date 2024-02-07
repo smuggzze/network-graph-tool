@@ -14,7 +14,10 @@
 }
 
 .graphOptions {
-    width: fit-content;
+    width: calc(100% - 30px);
     position: absolute;
     z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
