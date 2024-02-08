@@ -20,11 +20,11 @@ function DetailsSidebar({ canvasOffset, setCanvasOffset, selectedNode }) {
                 {canvasOffset == 700 ? ">>" : "<<"}
             </button>
             {canvasOffset == 700 &&
-            <>
+            <div style={{ overflowY: "scroll", height: "100%" }}>
                 <GraphDetails />
                 <NetworkStatistics />
                 {selectedNode && <SelectedNode selectedNode={selectedNode} />}
-            </>}
+            </div>}
         </div>
     )
 }

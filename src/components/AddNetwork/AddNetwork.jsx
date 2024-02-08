@@ -84,17 +84,25 @@ function AddNetwork({ setAddNetworkPopUp }) {
         const nodeArr = nodes.map((node) => { return { id: node, size: nodeSize } });
         const nodeMap = new Map(nodeArr.map(pair => [pair.id, pair]));
         const edgeObjects = edges.map((edge) => { return { source: nodeMap.get(edge[0]), target: nodeMap.get(edge[1]) }});
-
-        const graph = {
+        
+        // Data about the graph to be added including its nodes, edges, etc.
+        const data = {
             nodes: nodeArr,
             links: edges.map((edge) => { return { source: edge[0], target: edge[1] }}),
             isDirected: graphType === graphTypes.Directed,
-            networkName: networkName
+            networkName: networkName,
+            showParticles: false
         };
 
+        // Extra meta data for graphs that are directed.
+        const meta = graphType === graphTypes.Directed && graphIsAcyclic({ ...data, links: edgeObjects }) ? {
+            isDAG: true,
+            dagMode: "None"
+        } : {};
+
         const newGraph = {
-            ...graph,
-            isDAG: graphType === graphTypes.Directed && graphIsAcyclic({ ...graph, links: edgeObjects })
+            ...data,
+            ...meta
         };
 
         // Update graphs in local storage session.

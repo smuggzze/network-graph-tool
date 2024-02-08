@@ -13,8 +13,9 @@ const dagModes = Object.freeze({
     "None": null
 });
 
-function Graph({ graph, isLastGraph, width, selectedNode, setSelectedNode }) {
-    const [dagMode, setDagMode] = useState(null);
+function Graph({ graph, isLastGraph, width, height, selectedNode, setSelectedNode }) {
+    const [dagMode, setDagMode] = useState(graph.dagMode);
+    const [linkParticles, setLinkParticles] = useState(graph.showParticles);
     const graphContext = useContext(GraphContext);
     const graphRef = useRef(null);
 
@@ -23,15 +24,33 @@ function Graph({ graph, isLastGraph, width, selectedNode, setSelectedNode }) {
         setSelectedNode(node);
     }
 
+    function updateGraphLocalStorage(updatedData) {
+        const graphs = JSON.parse(localStorage.getItem("graphs")) || [];
+        localStorage.setItem("graphs", JSON.stringify([...graphs.map((x) => {
+            if (x.networkName !== graph.networkName) return x;
+            else return {
+                ...x,
+                ...updatedData
+            }
+        })]));
+    }
+
     function updateDagMode(e) {
         const mode = e.target.value;
-        setDagMode(dagModes[mode]);
+        updateGraphLocalStorage({ dagMode: mode });
+        setDagMode(mode);
     }
 
     function handleNodeDrag(node) {
         node.fx = node.x;
         node.fy = node.y;
         node.fz = node.z;
+    }
+
+    function toggleLinkParticles(e) {
+        const checked = e.target.checked;
+        updateGraphLocalStorage({ showParticles: checked });
+        setLinkParticles(checked);
     }
 
     function handleDrawNode(node, ctx, globalScale) {
@@ -56,14 +75,14 @@ function Graph({ graph, isLastGraph, width, selectedNode, setSelectedNode }) {
     }
 
     return (
-        <div className={styles.wrapper} data-testid="graph-1" style={!isLastGraph ? { borderRight: '1px solid #C5C5C5' } : {}}>
+        <div className={styles.wrapper} style={!isLastGraph ? { borderRight: '1px solid #C5C5C5' } : {}}>
             <div className={styles.graphOptions}>
                 <button className={`${styles.resetGraph} primaryBtn`}>
                     Reset graph
                 </button>
-                <div>
-                    <p>Graph style:</p>
-                    <select defaultValue="None" onChange={updateDagMode}>
+                {graph.isDAG && <div className={styles.graphStyle}>
+                    <p>DAG Mode:</p>
+                    <select className={styles.graphStylesDropdown} defaultValue={dagMode} onChange={updateDagMode}>
                         {Object.keys(dagModes).map((mode, index) => {
                             return (
                                 <option key={index} value={mode}>
@@ -72,10 +91,15 @@ function Graph({ graph, isLastGraph, width, selectedNode, setSelectedNode }) {
                             )
                         })}
                     </select>
+                </div>}
+                <div className={styles.showParticles}>
+                    <label htmlFor="show-particles">Show link particles</label>
+                    <input type="checkbox" name="show-particles" defaultChecked={linkParticles} onChange={toggleLinkParticles} />
                 </div>
             </div>
             <ForceGraph2D
                 width={width}
+                height={height}
                 ref={graphRef}
                 linkWidth={2}
                 linkDirectionalArrowLength={graph.isDirected ? 5 : null}
@@ -83,9 +107,11 @@ function Graph({ graph, isLastGraph, width, selectedNode, setSelectedNode }) {
                 linkCurvature={0.20}
                 onNodeDragEnd={handleNodeDrag}
                 onNodeClick={handleNodeClick}
-                cooldownTicks={100}
-                onEngineStop={() => graphRef.current.zoomToFit(400)}
-                dagMode={dagMode}
+                cooldownTicks={50}
+                onEngineStop={() => graphRef.current.zoomToFit(200)}
+                linkDirectionalParticles={linkParticles ? 3 : null}
+                linkDirectionalParticleWidth={linkParticles ? 3 : null}
+                dagMode={dagModes[dagMode]}
                 graphData={{
                     nodes: graph.nodes,
                     links: graph.links

@@ -22,7 +22,8 @@ function NetworkListItem({ networkName, updateSelectedGraph, isSelected }) {
 
     return (
         <div className={styles.listItem}>
-            <p style={isSelected ? { fontWeight: "bold" } : {}} onClick={() => updateSelectedGraph(networkName)}>
+            <p style={isSelected ? { fontWeight: "bold", cursor: "pointer", textDecoration: "underline" } : { cursor: "pointer" }} 
+            onClick={() => updateSelectedGraph(networkName)}>
                 {networkName}
             </p>
             <button className={`btn ${styles.removeBtn}`} onClick={removeGraph}>

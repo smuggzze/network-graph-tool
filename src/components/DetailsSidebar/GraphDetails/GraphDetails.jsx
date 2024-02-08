@@ -16,6 +16,7 @@ function GraphDetails() {
                 <GraphDetailsPair label="Nodes" value={graphContext.selectedGraph.nodes.length} />
                 <GraphDetailsPair label="Edges" value={graphContext.selectedGraph.links.length} />
                 <GraphDetailsPair label="Graph Type" value={graphContext.selectedGraph.isDirected ? "Directed" : "Undirected"} />
+                <GraphDetailsPair label="Directed Acyclic Graph (DAG)" value={graphContext.selectedGraph.isDAG ? "Yes" : "No"} />
             </div>
         </div>
     )
