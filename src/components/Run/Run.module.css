@@ -1,5 +1,5 @@
 
-.runAlgorithm {
+.run {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -9,12 +9,6 @@
 .runButton {
     height: 24px;
     cursor: pointer;
-}
-
-.algorithms {
-    display: flex;
-    gap: 22px;
-    flex-direction: column;
 }
 
 .runResultWrapper {

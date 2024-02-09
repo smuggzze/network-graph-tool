@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PopUpWrapper from "../../wrappers/PopUpWrapper";
+import PopUpWrapper from "../../wrappers/PopUpWrapper/PopUpWrapper";
 import { tutorialData } from "../../utils/tutorialData";
 import styles from "./TutorialPopup.module.css";
 

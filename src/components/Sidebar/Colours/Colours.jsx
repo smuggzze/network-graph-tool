@@ -11,10 +11,10 @@ function Colours() {
                 Colours
             </h2>
             <select className={styles.dropdown} onChange={(e) => setOption(e.target.value)}>
-                {Object.keys(graphColours).map((colour, index) => {
+                {Object.keys(graphColours).map((method, index) => {
                     return (
                         <option key={index}>
-                            {colour}
+                            {method}
                         </option>
                     )
                 })}
@@ -24,7 +24,7 @@ function Colours() {
                     return (
                         <div key={key} className={`sideText ${styles.dropdownOption}`}>
                             {key}
-                            <span className={styles.colourCircle} style={{ backgroundColor: graphColours[option][key] }}>
+                            <span className={styles.colourCircle} style={{ backgroundColor: graphColours[option][key].fillStyle }}>
                             </span>
                         </div>
                     )

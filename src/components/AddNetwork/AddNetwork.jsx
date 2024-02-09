@@ -1,7 +1,7 @@
 import styles from "./AddNetwork.module.css";
 import { useContext, useState, useRef } from "react";
 import { GraphContext, nodeSize } from "../Main/Main";
-import PopUpWrapper from "../../wrappers/PopUpWrapper";
+import PopUpWrapper from "../../wrappers/PopUpWrapper/PopUpWrapper";
 import { filterNodes } from "../../utils/filterNodes";
 import { parseCSVFile } from "../../utils/parseCSVFile";
 import { filterEdges } from "../../utils/filterEdges";
@@ -91,7 +91,17 @@ function AddNetwork({ setAddNetworkPopUp }) {
             links: edges.map((edge) => { return { source: edge[0], target: edge[1] }}),
             isDirected: graphType === graphTypes.Directed,
             networkName: networkName,
-            showParticles: false
+            showParticles: false,
+            styles: Object.fromEntries(new Map(nodeArr.map((node) => {
+                return [
+                    node.id,
+                    {
+                        fillStyle: "white",
+                        strokeStyle: "#22BEC8",
+                        textStyle: "#121212"
+                    }
+                ]
+            })))
         };
 
         // Extra meta data for graphs that are directed.

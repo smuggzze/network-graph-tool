@@ -59,9 +59,9 @@ function Graph({ graph, isLastGraph, width, height, selectedNode, setSelectedNod
         // Draw node
         ctx.beginPath();
         ctx.arc(node.x, node.y, node.size, 0, 2 * Math.PI);
-        ctx.fillStyle = selectedNode === node ? '#22BEC8' : 'white';
+        ctx.fillStyle = selectedNode === node ? '#22BEC8' : graph.styles[node.id].fillStyle;
         ctx.fill();
-        ctx.strokeStyle = '#22BEC8'; // Node border color
+        ctx.strokeStyle = selectedNode === node ? '#22BEC8' : graph.styles[node.id].strokeStyle; // Node border color
         ctx.lineWidth = 1 / globalScale;
         ctx.stroke();
 
@@ -69,7 +69,7 @@ function Graph({ graph, isLastGraph, width, height, selectedNode, setSelectedNod
         ctx.font = `${node.size / 1.3}px Sans-Serif`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillStyle = selectedNode === node ? 'white' : '#121212'; // Label color
+        ctx.fillStyle = selectedNode === node ? 'white' : graph.styles[node.id].textStyle; // Label color
         ctx.fillText(label, node.x, node.y);
         ctx.isPointInPath(node.x, node.y);
     }
