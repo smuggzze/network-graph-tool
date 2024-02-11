@@ -38,7 +38,7 @@ function SelectedNode({ selectedNode }) {
                 Selected Node
             </h2>
             <NodeInfo label="Node ID" value={nodeID} />
-            <NodeInfo label="Neighbours" value={`{${neighbours.toString()}}`} />
+            <NodeInfo label="Neighbours" value={neighbours.toString()} />
             <NodeInfo label="Out-degree" value={outDegree} />
             <NodeInfo label="In-degree" value={inDegree} />
             <NodeInfo label="Clustering Co." value={clusteringCo} />

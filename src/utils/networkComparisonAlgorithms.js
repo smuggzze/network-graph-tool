@@ -6,9 +6,9 @@ export class NetworkComparisonAlgorithms {
             const outDegree = graph.get(node).length;
             const bgColours = graphColours.Centrality;
 
-            const colour = outDegree >= 6 ? bgColours["High importance"] : 
-            outDegree >= 3 ? bgColours["Medium importance"] : 
-            bgColours["Low importance"];
+            const colour = outDegree >= 10 ? bgColours["Very high"] : 
+            outDegree >= 8 ? bgColours["High"] : outDegree >= 6 ?
+            bgColours["Medium"] : bgColours["Low"];
 
             return [
                 node,
@@ -31,9 +31,9 @@ export class NetworkComparisonAlgorithms {
             const inDegree = nodes.get(node);
             const bgColours = graphColours.Centrality;
 
-            const colour = inDegree >= 6 ? bgColours["High importance"] : 
-            inDegree >= 3 ? bgColours["Medium importance"] : 
-            bgColours["Low importance"];
+            const colour = inDegree >= 10 ? bgColours["Very high"] : 
+            inDegree >= 8 ? bgColours["High"] : inDegree >= 6 ?
+            bgColours["Medium"] : bgColours["Low"];
 
             return [
                 node,
@@ -46,7 +46,11 @@ export class NetworkComparisonAlgorithms {
 
     }
 
-    static closenessCentrality(graph) {
+    static inboundClosenessCentrality(graph) {
+
+    }
+
+    static outboundClosenessCentrality(graph) {
 
     }
 
@@ -55,11 +59,11 @@ export class NetworkComparisonAlgorithms {
     }
 
     static commonNodeIDs(graph) {
-
+        // jacob
     }
 
     static jaccardSimilarity(graph) {
-
+        // paige
     }
 
     static stronglyConnectedComponents(graph) {

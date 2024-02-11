@@ -1,7 +1,7 @@
 import ForceGraph2D from 'react-force-graph-2d';
-import styles from "./Graph.module.css";
+import styles from "./Graphs.module.css";
 import { GraphContext } from '../Main/Main';
-import { useRef, useContext, useState } from "react";
+import { useRef, useContext, useState, memo } from "react";
 
 const dagModes = Object.freeze({
     "Top-Down": "td",
@@ -13,7 +13,7 @@ const dagModes = Object.freeze({
     "None": null
 });
 
-function Graph({ graph, isLastGraph, width, height, selectedNode, setSelectedNode }) {
+export default memo(function Graph({ graph, isLastGraph, width, height, selectedNode, updateSelectedNode }) {
     const [dagMode, setDagMode] = useState(graph.dagMode);
     const [linkParticles, setLinkParticles] = useState(graph.showParticles);
     const graphContext = useContext(GraphContext);
@@ -21,7 +21,29 @@ function Graph({ graph, isLastGraph, width, height, selectedNode, setSelectedNod
 
     function handleNodeClick(node) {
         graphContext.setSelectedGraph(graph);
-        setSelectedNode(node);
+        updateSelectedNode(node);
+    }
+
+    function resetGraph() {
+        graphContext.setGraphs((graphs) => graphs.map((curGraph) => {
+            if (curGraph.networkName === graph.networkName) {
+                return {
+                    ...curGraph,
+                    styles: Object.fromEntries(new Map(Object.keys(curGraph.styles).map((node) => {
+                        return [
+                            node,
+                            {
+                                fillStyle: "white",
+                                strokeStyle: "#22BEC8",
+                                textStyle: "#121212"
+                            }
+                        ]
+                    })))
+                }
+            }
+
+            return curGraph;
+        }));
     }
 
     function updateGraphLocalStorage(updatedData) {
@@ -77,7 +99,7 @@ function Graph({ graph, isLastGraph, width, height, selectedNode, setSelectedNod
     return (
         <div className={styles.wrapper} style={!isLastGraph ? { borderRight: '1px solid #C5C5C5' } : {}}>
             <div className={styles.graphOptions}>
-                <button className={`${styles.resetGraph} primaryBtn`}>
+                <button className={`${styles.resetGraph} primaryBtn`} onClick={resetGraph}>
                     Reset graph
                 </button>
                 {graph.isDAG && <div className={styles.graphStyle}>
@@ -107,8 +129,8 @@ function Graph({ graph, isLastGraph, width, height, selectedNode, setSelectedNod
                 linkCurvature={0.20}
                 onNodeDragEnd={handleNodeDrag}
                 onNodeClick={handleNodeClick}
-                cooldownTicks={50}
-                onEngineStop={() => graphRef.current.zoomToFit(200)}
+                linkDirectionalParticleColor={() => "#22BEC8"}
+                linkDirectionalArrowColor={() => "#22BEC8"}
                 linkDirectionalParticles={linkParticles ? 3 : null}
                 linkDirectionalParticleWidth={linkParticles ? 3 : null}
                 dagMode={dagModes[dagMode]}
@@ -119,6 +141,4 @@ function Graph({ graph, isLastGraph, width, height, selectedNode, setSelectedNod
             />
         </div>
     )
-}
-
-export default Graph;
+})

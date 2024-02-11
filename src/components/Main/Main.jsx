@@ -1,11 +1,10 @@
-import Graph from "../Graph/Graph";
 import styles from "./Main.module.css";
 import Sidebar from "../Sidebar/Sidebar";
 import DetailsSidebar from "../DetailsSidebar/DetailsSidebar";
 import { useState, createContext, useEffect } from "react";
-import useWindowSize from "../../hooks/useWindowSize";
 import AddNetwork from "../AddNetwork/AddNetwork";
 import TutorialPopUp from "../TutorialPopUp/TutorialPopUp";
+import Graphs from "../Graphs/Graphs";
 
 // Will be used to allow all child components to access the graph data.
 export const GraphContext = createContext({});
@@ -13,13 +12,16 @@ export const GraphContext = createContext({});
 export const nodeSize = 8;
 
 function Main() {
-    const [windowWidth, windowHeight] = useWindowSize();
     const [selectedGraph, setSelectedGraph] = useState(null);
     const [canvasOffset, setCanvasOffset] = useState(700);
     const [addNetworkPopUp, setAddNetworkPopUp] = useState(false);
     const [graphs, setGraphs] = useState(JSON.parse(localStorage.getItem("graphs")) || []);
     const [addTutorialPopUp, setTutorialPopUp] = useState(true);
     const [selectedNode, setSelectedNode] = useState(null);
+
+    function updateSelectedNode(node) {
+        setSelectedNode(node);
+    }
 
     useEffect(() => {
         // If no graph is selected and the user has at least one graph uploaded, 
@@ -42,21 +44,12 @@ function Main() {
                 />
                 {selectedGraph != null ?
                 <>
-                    <div className={styles.graphs} style={{ width: `${windowWidth - canvasOffset}px` }}>
-                        {graphs.map((graph, index) => {
-                            return (
-                                <Graph 
-                                    graph={graph}
-                                    isLastGraph={index == graphs.length - 1}
-                                    width={(windowWidth - canvasOffset) / graphs.length}
-                                    height={windowHeight}
-                                    selectedNode={selectedNode}
-                                    setSelectedNode={setSelectedNode}
-                                    key={graph.networkName}
-                                />
-                            )
-                        })}
-                    </div>
+                    <Graphs
+                        graphs={graphs}
+                        selectedNode={selectedNode}
+                        updateSelectedNode={updateSelectedNode}
+                        canvasOffset={canvasOffset}
+                    />
                     <DetailsSidebar
                         canvasOffset={canvasOffset} 
                         setCanvasOffset={setCanvasOffset} 

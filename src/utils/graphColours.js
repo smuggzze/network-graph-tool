@@ -2,19 +2,24 @@
 // Colours that will be used in the graph visualisations.
 export const graphColours = {
     "Centrality": {
-        "High importance": {
-            "fillStyle": "red",
-            "strokeStyle": "red",
+        "Very high": {
+            "fillStyle": "#1938b6",
+            "strokeStyle": "#1938b6",
             "textStyle": "white"
         },
-        "Medium importance": {
-            "fillStyle": "orange",
-            "strokeStyle": "orange",
-            "textStyle": "#121212"
+        "High": {
+            "fillStyle": "#259bda",
+            "strokeStyle": "#259bda",
+            "textStyle": "white"
         },
-        "Low importance": {
-            "fillStyle": "green",
-            "strokeStyle": "green",
+        "Medium": {
+            "fillStyle": "#27d87c",
+            "strokeStyle": "#27d87c",
+            "textStyle": "white"
+        },
+        "Low": {
+            "fillStyle": "#dc1413",
+            "strokeStyle": "#dc1413",
             "textStyle": "white"
         }
     },
