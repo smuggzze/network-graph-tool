@@ -9,16 +9,6 @@
     justify-content: space-between;
 }
 
-.removeBtn {
-    background-color: rgb(228, 49, 49);
-    height: 24px;
-    color: white;
-}
-
-.removeBtn:hover {
-    background-color: rgb(233, 65, 65);
-}
-
 .addNetwork {
     margin-left: 15px;
     color: #757575;

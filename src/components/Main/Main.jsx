@@ -54,6 +54,7 @@ function Main() {
                         canvasOffset={canvasOffset} 
                         setCanvasOffset={setCanvasOffset} 
                         selectedNode={selectedNode}
+                        updateSelectedNode={updateSelectedNode}
                     />
                 </> :
                 <div className={styles.noNetworksFound}>

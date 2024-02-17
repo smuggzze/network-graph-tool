@@ -2,6 +2,7 @@ import ForceGraph2D from 'react-force-graph-2d';
 import styles from "./Graphs.module.css";
 import { GraphContext, nodeSize } from '../Main/Main';
 import { useRef, useContext, useState, memo } from "react";
+import { updateGraphLocalStorage } from '../../utils/updateGraphLocalStorage';
 
 const dagModes = Object.freeze({
     "Top-Down": "td",
@@ -48,20 +49,9 @@ export default memo(function Graph({ graph, isLastGraph, width, height, selected
         }));
     }
 
-    function updateGraphLocalStorage(updatedData) {
-        const graphs = JSON.parse(localStorage.getItem("graphs")) || [];
-        localStorage.setItem("graphs", JSON.stringify([...graphs.map((x) => {
-            if (x.networkName !== graph.networkName) return x;
-            else return {
-                ...x,
-                ...updatedData
-            }
-        })]));
-    }
-
     function updateDagMode(e) {
         const mode = e.target.value;
-        updateGraphLocalStorage({ dagMode: mode });
+        updateGraphLocalStorage({ dagMode: mode }, graph.networkName);
         setDagMode(mode);
     }
 
@@ -73,13 +63,13 @@ export default memo(function Graph({ graph, isLastGraph, width, height, selected
 
     function toggleLinkParticles(e) {
         const checked = e.target.checked;
-        updateGraphLocalStorage({ showParticles: checked });
+        updateGraphLocalStorage({ showParticles: checked }, graph.networkName);
         setLinkParticles(checked);
     }
 
     function toggleZoomToFit(e) {
         const checked = e.target.checked;
-        updateGraphLocalStorage({ zoomToFit: checked });
+        updateGraphLocalStorage({ zoomToFit: checked }, graph.networkName);
         setZoomToFit(checked);
     }
 
