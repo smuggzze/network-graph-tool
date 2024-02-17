@@ -1,0 +1,20 @@
+
+.moreInfo {
+    position: relative;
+}
+
+.moreInfoPopUp {
+    position: absolute;
+    top: 25px;
+    left: 0px;
+    background-color: white;
+    box-shadow: 0px 0px 6px gray;
+    border-radius: 6px;
+    padding: 5px;
+    z-index: 10;
+    width: 220px;
+}
+
+.moreInfoPopUp > p {
+    font-size: small;
+}

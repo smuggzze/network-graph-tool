@@ -1,20 +1,11 @@
-import { graphColours } from "./graphColours";
+import { getCentralityRanks } from "./getCentralityRanks";
 
 export class NetworkComparisonAlgorithms {
     static outDegreeCentrality(graph) {
-        return Object.fromEntries(new Map(Array.from(graph.keys()).map((node) => {
-            const outDegree = graph.get(node).length;
-            const bgColours = graphColours.Centrality;
-
-            const colour = outDegree >= 10 ? bgColours["Very high"] : 
-            outDegree >= 8 ? bgColours["High"] : outDegree >= 6 ?
-            bgColours["Medium"] : bgColours["Low"];
-
-            return [
-                node,
-                { ...colour }
-            ];
-        })));
+        const outDegrees = Array.from(graph.keys())
+        .map((node) => [node, graph.get(node).length]);
+        
+        return getCentralityRanks(outDegrees);
     }
 
     static inDegreeCentrality(graph) {
@@ -27,19 +18,10 @@ export class NetworkComparisonAlgorithms {
             }
         }
 
-        return Object.fromEntries(new Map(Array.from(graph.keys()).map((node) => {
-            const inDegree = nodes.get(node);
-            const bgColours = graphColours.Centrality;
+        const inDegrees = Array.from(graph.keys())
+        .map((node) => [node, nodes.get(node)]);
 
-            const colour = inDegree >= 10 ? bgColours["Very high"] : 
-            inDegree >= 8 ? bgColours["High"] : inDegree >= 6 ?
-            bgColours["Medium"] : bgColours["Low"];
-
-            return [
-                node,
-                { ...colour }
-            ];
-        })));
+        return getCentralityRanks(inDegrees);
     }
 
     static betweennessCentrality(graph) {
