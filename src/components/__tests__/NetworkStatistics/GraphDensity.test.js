@@ -45,7 +45,7 @@ test('Graph 7 nodes 14 connections', () => {
     expect(NetworkStatisticAlgorithms.graphDensity(graph)).toBe(0.333);
 });
 
-test('Graph 13 nodes 37 connections min', () => {
+test('Graph 13 nodes 40 connections', () => {
     const graph = new Map([
         [1, [2,7,12]],
         [2, [3,1,4,6]],
