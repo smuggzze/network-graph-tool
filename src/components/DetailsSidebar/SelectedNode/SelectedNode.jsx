@@ -6,7 +6,7 @@ import { convertToAdjList } from "../../../utils/convertToAdjList";
 import { nodeStatisticAlgorithms } from "../../../utils/nodeStatisticAlgorithms";
 import { updateGraphLocalStorage } from "../../../utils/updateGraphLocalStorage";
 
-function SelectedNode({ selectedNode, updateSelectedNode }) {
+function SelectedNode({ selectedNode, updateSelectedNode, resetGraph }) {
     const graphContext = useContext(GraphContext);
     const [nodeID, setNodeID] = useState(selectedNode == null ? selectedNode : selectedNode.id);
     const [neighbours, setNeighbours] = useState([]);
@@ -36,6 +36,7 @@ function SelectedNode({ selectedNode, updateSelectedNode }) {
 
         updateSelectedNode(null);
         updateGraphLocalStorage(updatedGraph, graphContext.selectedGraph.networkName);
+        resetGraph(graphContext.selectedGraph);
     }
 
     const updateNodeStatistics = useCallback(() => {

@@ -23,6 +23,29 @@ function Main() {
         setSelectedNode(node);
     }
 
+    function resetGraph(graph) {
+        setGraphs((graphs) => graphs.map((curGraph) => {
+            if (curGraph.networkName === graph.networkName) {
+                return {
+                    ...curGraph,
+                    styles: Object.fromEntries(new Map(Object.keys(curGraph.styles).map((node) => {
+                        return [
+                            node,
+                            {
+                                fillStyle: "white",
+                                strokeStyle: "#1E90FF",
+                                textStyle: "#121212",
+                                size: nodeSize
+                            }
+                        ]
+                    })))
+                }
+            }
+
+            return curGraph;
+        }));
+    }
+
     useEffect(() => {
         // If no graph is selected and the user has at least one graph uploaded, 
         // then automatically choose the first graph. Runs when a graph is added or deleted.
@@ -46,6 +69,7 @@ function Main() {
                 <>
                     <Graphs
                         graphs={graphs}
+                        resetGraph={resetGraph}
                         selectedNode={selectedNode}
                         updateSelectedNode={updateSelectedNode}
                         canvasOffset={canvasOffset}
@@ -55,6 +79,7 @@ function Main() {
                         setCanvasOffset={setCanvasOffset} 
                         selectedNode={selectedNode}
                         updateSelectedNode={updateSelectedNode}
+                        resetGraph={resetGraph}
                     />
                 </> :
                 <div className={styles.noNetworksFound}>

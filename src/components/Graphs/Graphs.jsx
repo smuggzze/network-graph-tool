@@ -3,7 +3,7 @@ import { memo } from "react";
 import styles from "./Graphs.module.css";
 import Graph from "./Graph";
 
-export default memo(function Graphs({ graphs, selectedNode, updateSelectedNode, canvasOffset }) {
+export default memo(function Graphs({ graphs, resetGraph, selectedNode, updateSelectedNode, canvasOffset }) {
     const [windowWidth, windowHeight] = useWindowSize();
 
     return (
@@ -12,6 +12,7 @@ export default memo(function Graphs({ graphs, selectedNode, updateSelectedNode, 
                 return (
                     <Graph 
                         graph={graph}
+                        resetGraph={resetGraph}
                         isLastGraph={index == graphs.length - 1}
                         width={(windowWidth - canvasOffset) / graphs.length}
                         height={windowHeight}

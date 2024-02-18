@@ -3,7 +3,7 @@ import GraphDetails from "./GraphDetails/GraphDetails";
 import NetworkStatistics from "./NetworkStatistics/NetworkStatistics";
 import SelectedNode from "./SelectedNode/SelectedNode";
 
-function DetailsSidebar({ canvasOffset, setCanvasOffset, selectedNode, updateSelectedNode }) {
+function DetailsSidebar({ canvasOffset, setCanvasOffset, selectedNode, updateSelectedNode, resetGraph }) {
     // Toggles the details sidebar on and off to improve
     // screen space for graph visualisation.
     function toggleDetails() {
@@ -26,7 +26,8 @@ function DetailsSidebar({ canvasOffset, setCanvasOffset, selectedNode, updateSel
                 {selectedNode && 
                 <SelectedNode 
                     selectedNode={selectedNode} 
-                    updateSelectedNode={updateSelectedNode} 
+                    updateSelectedNode={updateSelectedNode}
+                    resetGraph={resetGraph} 
                 />}
             </div>}
         </div>

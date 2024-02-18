@@ -1,6 +1,6 @@
 import ForceGraph2D from 'react-force-graph-2d';
 import styles from "./Graphs.module.css";
-import { GraphContext, nodeSize } from '../Main/Main';
+import { GraphContext } from '../Main/Main';
 import { useRef, useContext, useState, memo, useEffect } from "react";
 import { updateGraphLocalStorage } from '../../utils/updateGraphLocalStorage';
 
@@ -14,7 +14,7 @@ const dagModes = Object.freeze({
     "None": null
 });
 
-export default memo(function Graph({ graph, isLastGraph, width, height, selectedNode, updateSelectedNode }) {
+export default memo(function Graph({ graph, resetGraph, isLastGraph, width, height, selectedNode, updateSelectedNode }) {
     const [dagMode, setDagMode] = useState(graph.dagMode);
     const [linkParticles, setLinkParticles] = useState(graph.showParticles);
     const [zoomToFit, setZoomToFit] = useState(graph.zoomToFit);
@@ -24,29 +24,6 @@ export default memo(function Graph({ graph, isLastGraph, width, height, selected
     function handleNodeClick(node) {
         graphContext.setSelectedGraph(graph);
         updateSelectedNode(node);
-    }
-
-    function resetGraph() {
-        graphContext.setGraphs((graphs) => graphs.map((curGraph) => {
-            if (curGraph.networkName === graph.networkName) {
-                return {
-                    ...curGraph,
-                    styles: Object.fromEntries(new Map(Object.keys(curGraph.styles).map((node) => {
-                        return [
-                            node,
-                            {
-                                fillStyle: "white",
-                                strokeStyle: "#1E90FF",
-                                textStyle: "#121212",
-                                size: nodeSize
-                            }
-                        ]
-                    })))
-                }
-            }
-
-            return curGraph;
-        }));
     }
 
     function downloadGraph() {
@@ -121,7 +98,7 @@ export default memo(function Graph({ graph, isLastGraph, width, height, selected
         <div className={styles.wrapper} style={!isLastGraph ? { borderRight: '1px solid #C5C5C5' } : {}}>
             <div className={styles.graphOptions}>
                 <div className={styles.btnActions}>
-                    <button className={`${styles.btnAction} primaryBtn`} onClick={resetGraph}>
+                    <button className={`${styles.btnAction} primaryBtn`} onClick={() => resetGraph(graph)}>
                         Reset
                     </button>
                     <button className={`${styles.btnAction} ${styles.downloadBtn} primaryBtn`} onClick={downloadGraph}>
