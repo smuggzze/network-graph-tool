@@ -1,6 +1,7 @@
 import styles from "./Colours.module.css";
 import { graphColours } from "../../../utils/graphColours";
 import { useState } from "react";
+import Colour from "./Colour";
 
 function Colours() {
     const [option, setOption] = useState("Centrality");
@@ -22,11 +23,11 @@ function Colours() {
             <div className={styles.dropdownWrapper}>
                 {Object.keys(graphColours[option]).map((key) => {
                     return (
-                        <div key={key} className={`sideText ${styles.dropdownOption}`}>
-                            {key}
-                            <span className={styles.colourCircle} style={{ backgroundColor: graphColours[option][key].fillStyle }}>
-                            </span>
-                        </div>
+                        <Colour
+                            text={key}
+                            colour={graphColours[option][key].fillStyle}
+                            key={key}
+                        />
                     )
                 })}
             </div>

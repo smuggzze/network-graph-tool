@@ -1,8 +1,9 @@
 import ForceGraph2D from 'react-force-graph-2d';
 import styles from "./Graphs.module.css";
 import { GraphContext, nodeSize } from '../Main/Main';
-import { useRef, useContext, useState, memo } from "react";
+import { useRef, useContext, useState, memo, useEffect } from "react";
 import { updateGraphLocalStorage } from '../../utils/updateGraphLocalStorage';
+import * as d3 from 'd3-force';
 
 const dagModes = Object.freeze({
     "Top-Down": "td",
@@ -116,6 +117,12 @@ export default memo(function Graph({ graph, isLastGraph, width, height, selected
         ctx.fillText(label, node.x, node.y);
         ctx.isPointInPath(node.x, node.y);
     }
+
+    useEffect(() => {
+        if (graphRef.current) {
+            graphRef.current.d3Force('charge').distanceMax(300);
+        }
+    }, [graphRef]);
 
     return (
         <div className={styles.wrapper} style={!isLastGraph ? { borderRight: '1px solid #C5C5C5' } : {}}>
