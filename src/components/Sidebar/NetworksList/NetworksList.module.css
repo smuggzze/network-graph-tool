@@ -10,10 +10,16 @@
 }
 
 .addNetwork {
-    margin-left: 15px;
-    color: #757575;
+    color: #1E90FF;
     cursor: pointer;
-    font-size: 1rem;
     background-color: transparent;
     border: none;
+    width: fit-content;
+}
+
+.networkActions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 15px;
 }

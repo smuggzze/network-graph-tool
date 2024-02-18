@@ -1,4 +1,4 @@
-import styles from "./AddNetwork.module.css";
+import styles from "./CreateNetwork.module.css";
 import { useContext, useState, useRef } from "react";
 import { GraphContext, nodeSize } from "../Main/Main";
 import PopUpWrapper from "../../wrappers/PopUpWrapper/PopUpWrapper";
@@ -9,7 +9,7 @@ import { nodeTypes } from "../../utils/nodeTypes";
 import { graphTypes } from "../../utils/graphTypes";
 import { graphIsAcyclic } from "../../utils/graphIsAcyclic";
 
-function AddNetwork({ setAddNetworkPopUp }) {
+function CreateNetwork({ setCreateNetworkPopUp }) {
     const graphContext = useContext(GraphContext);
     const [nodeList, setNodeList] = useState([]);
     const [edgeList, setEdgeList] = useState([]);
@@ -74,8 +74,8 @@ function AddNetwork({ setAddNetworkPopUp }) {
 
         // Pass filtered nodes and edges to 'createGraph' function for creation.
         createGraph(filteredNodes, filteredEdges);
-        // Close 'Add Network' pop up window.
-        setAddNetworkPopUp(false);
+        // Close 'Create Network' pop up window.
+        setCreateNetworkPopUp(false);
     }
 
     // Creates a new graph using the filtered nodes and edges
@@ -165,7 +165,7 @@ function AddNetwork({ setAddNetworkPopUp }) {
     }
 
     return (
-        <PopUpWrapper setPopUp={setAddNetworkPopUp} title="Add a network">
+        <PopUpWrapper setPopUp={setCreateNetworkPopUp} title="Create a network">
             <div className={styles.wrapper}>
                 <div>
                     <div className={styles.fileUpload}>
@@ -244,4 +244,4 @@ function AddNetwork({ setAddNetworkPopUp }) {
     )
 }
 
-export default AddNetwork;
+export default CreateNetwork;

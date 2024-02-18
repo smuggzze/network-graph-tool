@@ -49,6 +49,29 @@ export default memo(function Graph({ graph, isLastGraph, width, height, selected
         }));
     }
 
+    function downloadGraph() {
+        const graphData = {
+            ...graph,
+            links: graph.links.map((x) => { return { source: x.source.id, target: x.target.id }}),
+            nodes: graph.nodes.map((node) => { return { id: node.id }}),
+        };
+
+        const jsonData = JSON.stringify(graphData);
+        const blob = new Blob([jsonData], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+
+        // Create a hidden anchor element
+        const anchor = document.createElement('a');
+        anchor.download = 'graph.json'; // Set the filename for the downloaded JSON file
+        anchor.href = url;
+
+        // Programmatically click the anchor to trigger download
+        anchor.click();
+
+        // Clean up
+        URL.revokeObjectURL(url);
+    }
+
     function updateDagMode(e) {
         const mode = e.target.value;
         updateGraphLocalStorage({ dagMode: mode }, graph.networkName);
@@ -97,9 +120,14 @@ export default memo(function Graph({ graph, isLastGraph, width, height, selected
     return (
         <div className={styles.wrapper} style={!isLastGraph ? { borderRight: '1px solid #C5C5C5' } : {}}>
             <div className={styles.graphOptions}>
-                <button className={`${styles.resetGraph} primaryBtn`} onClick={resetGraph}>
-                    Reset graph
-                </button>
+                <div className={styles.btnActions}>
+                    <button className={`${styles.btnAction} primaryBtn`} onClick={resetGraph}>
+                        Reset
+                    </button>
+                    <button className={`${styles.btnAction} ${styles.downloadBtn} primaryBtn`} onClick={downloadGraph}>
+                        Download
+                    </button>
+                </div>
                 {graph.isDAG && <div className={styles.graphStyle}>
                     <p>DAG Mode:</p>
                     <select className={styles.graphStylesDropdown} defaultValue={dagMode} onChange={updateDagMode}>

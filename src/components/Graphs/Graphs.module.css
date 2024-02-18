@@ -5,12 +5,11 @@
     overflow: hidden;
 }
 
-.resetGraph {
-    width: 120px;
+.btnAction {
+    width: 100px;
     height: 36px;
     font-size: 1rem;
     box-shadow: 0px 0px 5px rgb(202, 202, 202);
-    margin-bottom: 15px;
 }
 
 .graphOptions {
@@ -43,4 +42,18 @@
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: 1fr;
+}
+
+.btnActions {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.downloadBtn {
+    background-color: #757575 !important;
+}
+
+.downloadBtn:hover {
+    background-color: #808080 !important;
 }

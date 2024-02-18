@@ -2,7 +2,7 @@ import styles from "./Main.module.css";
 import Sidebar from "../Sidebar/Sidebar";
 import DetailsSidebar from "../DetailsSidebar/DetailsSidebar";
 import { useState, createContext, useEffect } from "react";
-import AddNetwork from "../AddNetwork/AddNetwork";
+import CreateNetwork from "../CreateNetwork/CreateNetwork";
 import TutorialPopUp from "../TutorialPopUp/TutorialPopUp";
 import Graphs from "../Graphs/Graphs";
 
@@ -14,7 +14,7 @@ export const nodeSize = 8;
 function Main() {
     const [selectedGraph, setSelectedGraph] = useState(null);
     const [canvasOffset, setCanvasOffset] = useState(720);
-    const [addNetworkPopUp, setAddNetworkPopUp] = useState(false);
+    const [createNetworkPopUp, setCreateNetworkPopUp] = useState(false);
     const [graphs, setGraphs] = useState(JSON.parse(localStorage.getItem("graphs")) || []);
     const [addTutorialPopUp, setTutorialPopUp] = useState(true);
     const [selectedNode, setSelectedNode] = useState(null);
@@ -35,11 +35,11 @@ function Main() {
     return (
         <GraphContext.Provider value={{selectedGraph, setSelectedGraph, graphs, setGraphs}}>
             {addTutorialPopUp && <TutorialPopUp setTutorialPopUp={setTutorialPopUp} />}
-            {addNetworkPopUp && <AddNetwork setAddNetworkPopUp={setAddNetworkPopUp} />}
+            {createNetworkPopUp && <CreateNetwork setCreateNetworkPopUp={setCreateNetworkPopUp} />}
             <div className={styles.mainPage}>
                 <Sidebar 
                     networkNames={graphs.map((graph) => graph.networkName)}
-                    setAddNetworkPopUp={setAddNetworkPopUp} 
+                    setAddNetworkPopUp={setCreateNetworkPopUp} 
                     setTutorialPopUp={setTutorialPopUp}
                 />
                 {selectedGraph != null ?
@@ -62,7 +62,7 @@ function Main() {
                         <p className={styles.noNetworksText}>
                             You currently have no networks to show...
                         </p>
-                        <button className={`${styles.startVisualising} primaryBtn`} onClick={() => setAddNetworkPopUp(true)}>
+                        <button className={`${styles.startVisualising} primaryBtn`} onClick={() => setCreateNetworkPopUp(true)}>
                             Start Visualising
                         </button>
                     </div>

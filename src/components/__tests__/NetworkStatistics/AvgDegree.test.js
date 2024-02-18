@@ -9,6 +9,7 @@ test('Graph 3 nodes 3 connections', () => {
 
     expect(NetworkStatisticAlgorithms.avgDegree(graph)).toBe(1);
 });
+
 test('Graph 3 nodes 0 connections', () => {
     const graph = new Map([
         [1, []],
@@ -49,6 +50,7 @@ test('Graph 6 nodes 9 connections', () => {
 
     expect(NetworkStatisticAlgorithms.avgDegree(graph)).toBe(1.5);
 });
+
 test('Graph 6 nodes 30 connections', () => {
     const graph = new Map([
         [1, [2,3,4,5,6]],
