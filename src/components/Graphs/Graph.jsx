@@ -3,7 +3,6 @@ import styles from "./Graphs.module.css";
 import { GraphContext, nodeSize } from '../Main/Main';
 import { useRef, useContext, useState, memo, useEffect } from "react";
 import { updateGraphLocalStorage } from '../../utils/updateGraphLocalStorage';
-import * as d3 from 'd3-force';
 
 const dagModes = Object.freeze({
     "Top-Down": "td",
