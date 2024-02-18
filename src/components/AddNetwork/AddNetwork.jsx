@@ -81,7 +81,7 @@ function AddNetwork({ setAddNetworkPopUp }) {
     // Creates a new graph using the filtered nodes and edges
     // from the CSV files and updates the state.
     function createGraph(nodes, edges) {
-        const nodeArr = nodes.map((node) => { return { id: node, size: nodeSize } });
+        const nodeArr = nodes.map((node) => { return { id: node } });
         const nodeMap = new Map(nodeArr.map(pair => [pair.id, pair]));
         const edgeObjects = edges.map((edge) => { return { source: nodeMap.get(edge[0]), target: nodeMap.get(edge[1]) }});
         
@@ -92,13 +92,15 @@ function AddNetwork({ setAddNetworkPopUp }) {
             isDirected: graphType === graphTypes.Directed,
             networkName: networkName,
             showParticles: false,
+            zoomToFit: false,
             styles: Object.fromEntries(new Map(nodeArr.map((node) => {
                 return [
                     node.id,
                     {
                         fillStyle: "white",
-                        strokeStyle: "#22BEC8",
-                        textStyle: "#121212"
+                        strokeStyle: "#1E90FF",
+                        textStyle: "#121212",
+                        size: nodeSize
                     }
                 ]
             })))

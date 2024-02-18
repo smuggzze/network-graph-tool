@@ -1,4 +1,4 @@
-import styles from "./SelectedNode.module.css";
+import styles from "./NodeInfo.module.css";
 
 function NodeInfo({ label, value }) {
     return (

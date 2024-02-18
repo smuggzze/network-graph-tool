@@ -12,7 +12,7 @@ function NetworkStatistic({ label, algorithm }) {
     // and passes it into the graph algorithm prop function.
     function runAlgorithm() {
         const graph = convertToAdjList(graphContext.selectedGraph);
-        const result = algorithm(graph, graphContext.selectedGraph.isDirected);
+        const result = algorithm.run(graph, graphContext.selectedGraph.isDirected);
         
         // Show numerical result in UI.
         setStatistic(result);
@@ -25,6 +25,7 @@ function NetworkStatistic({ label, algorithm }) {
     return (
         <Run
             label={label}
+            moreInfo={algorithm.moreInfo}
             runAlgorithm={runAlgorithm}
             data={statistic}
         />

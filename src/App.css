@@ -26,7 +26,7 @@
 }
 
 .primaryBtn {
-    background-color: #22BEC8;
+    background-color: #1E90FF;
     color: white;
     border: none;
     border-radius: 6px;
@@ -37,11 +37,11 @@
 }
 
 .primaryBtn:hover {
-    background-color: #30c9d4;
+    background-color: #2f98ff;
 }
 
 .sidebar {
-    min-width: 350px;
+    min-width: 360px;
     height: 100%;
     background-color: #FFFFFF;
     padding: 15px;
@@ -56,6 +56,16 @@
     font-size: 1.2rem;
     margin-top: 35px;
     font-weight: normal;
+}
+
+.removeBtn {
+    background-color: rgb(228, 49, 49);
+    height: 24px;
+    color: white;
+}
+
+.removeBtn:hover {
+    background-color: rgb(233, 65, 65);
 }
 
 .popUpWrapper {

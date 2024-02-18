@@ -1,7 +1,8 @@
 import ForceGraph2D from 'react-force-graph-2d';
 import styles from "./Graphs.module.css";
-import { GraphContext } from '../Main/Main';
+import { GraphContext, nodeSize } from '../Main/Main';
 import { useRef, useContext, useState, memo } from "react";
+import { updateGraphLocalStorage } from '../../utils/updateGraphLocalStorage';
 
 const dagModes = Object.freeze({
     "Top-Down": "td",
@@ -16,6 +17,7 @@ const dagModes = Object.freeze({
 export default memo(function Graph({ graph, isLastGraph, width, height, selectedNode, updateSelectedNode }) {
     const [dagMode, setDagMode] = useState(graph.dagMode);
     const [linkParticles, setLinkParticles] = useState(graph.showParticles);
+    const [zoomToFit, setZoomToFit] = useState(graph.zoomToFit);
     const graphContext = useContext(GraphContext);
     const graphRef = useRef(null);
 
@@ -34,8 +36,9 @@ export default memo(function Graph({ graph, isLastGraph, width, height, selected
                             node,
                             {
                                 fillStyle: "white",
-                                strokeStyle: "#22BEC8",
-                                textStyle: "#121212"
+                                strokeStyle: "#1E90FF",
+                                textStyle: "#121212",
+                                size: nodeSize
                             }
                         ]
                     })))
@@ -46,20 +49,9 @@ export default memo(function Graph({ graph, isLastGraph, width, height, selected
         }));
     }
 
-    function updateGraphLocalStorage(updatedData) {
-        const graphs = JSON.parse(localStorage.getItem("graphs")) || [];
-        localStorage.setItem("graphs", JSON.stringify([...graphs.map((x) => {
-            if (x.networkName !== graph.networkName) return x;
-            else return {
-                ...x,
-                ...updatedData
-            }
-        })]));
-    }
-
     function updateDagMode(e) {
         const mode = e.target.value;
-        updateGraphLocalStorage({ dagMode: mode });
+        updateGraphLocalStorage({ dagMode: mode }, graph.networkName);
         setDagMode(mode);
     }
 
@@ -71,8 +63,14 @@ export default memo(function Graph({ graph, isLastGraph, width, height, selected
 
     function toggleLinkParticles(e) {
         const checked = e.target.checked;
-        updateGraphLocalStorage({ showParticles: checked });
+        updateGraphLocalStorage({ showParticles: checked }, graph.networkName);
         setLinkParticles(checked);
+    }
+
+    function toggleZoomToFit(e) {
+        const checked = e.target.checked;
+        updateGraphLocalStorage({ zoomToFit: checked }, graph.networkName);
+        setZoomToFit(checked);
     }
 
     function handleDrawNode(node, ctx, globalScale) {
@@ -80,15 +78,15 @@ export default memo(function Graph({ graph, isLastGraph, width, height, selected
 
         // Draw node
         ctx.beginPath();
-        ctx.arc(node.x, node.y, node.size, 0, 2 * Math.PI);
-        ctx.fillStyle = selectedNode === node ? '#22BEC8' : graph.styles[node.id].fillStyle;
+        ctx.arc(node.x, node.y, graph.styles[node.id].size, 0, 2 * Math.PI);
+        ctx.fillStyle = selectedNode === node ? '#e43131' : graph.styles[node.id].fillStyle;
         ctx.fill();
-        ctx.strokeStyle = selectedNode === node ? '#22BEC8' : graph.styles[node.id].strokeStyle; // Node border color
+        ctx.strokeStyle = selectedNode === node ? '#e43131' : graph.styles[node.id].strokeStyle; // Node border color
         ctx.lineWidth = 1 / globalScale;
         ctx.stroke();
 
         // Draw label
-        ctx.font = `${node.size / 1.3}px Sans-Serif`;
+        ctx.font = `${graph.styles[node.id].size / 1.3}px Sans-Serif`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillStyle = selectedNode === node ? 'white' : graph.styles[node.id].textStyle; // Label color
@@ -114,9 +112,13 @@ export default memo(function Graph({ graph, isLastGraph, width, height, selected
                         })}
                     </select>
                 </div>}
-                <div className={styles.showParticles}>
+                <div className={styles.checkBox}>
                     <label htmlFor="show-particles">Show link particles</label>
                     <input type="checkbox" name="show-particles" defaultChecked={linkParticles} onChange={toggleLinkParticles} />
+                </div>
+                <div className={styles.checkBox} style={{ marginTop: "8px" }}>
+                    <label htmlFor="zoom-to-fit">Zoom to fit</label>
+                    <input type="checkbox" name="zoom-to-fit" defaultChecked={zoomToFit} onChange={toggleZoomToFit} />
                 </div>
             </div>
             <ForceGraph2D
@@ -124,15 +126,17 @@ export default memo(function Graph({ graph, isLastGraph, width, height, selected
                 height={height}
                 ref={graphRef}
                 linkWidth={2}
-                linkDirectionalArrowLength={graph.isDirected ? 5 : null}
+                linkDirectionalArrowLength={graph.isDirected ? 5 : undefined}
                 nodeCanvasObject={handleDrawNode}
                 linkCurvature={0.20}
                 onNodeDragEnd={handleNodeDrag}
                 onNodeClick={handleNodeClick}
-                linkDirectionalParticleColor={() => "#22BEC8"}
-                linkDirectionalArrowColor={() => "#22BEC8"}
-                linkDirectionalParticles={linkParticles ? 3 : null}
-                linkDirectionalParticleWidth={linkParticles ? 3 : null}
+                cooldownTicks={zoomToFit ? 100 : undefined}
+                onEngineStop={zoomToFit ? () => graphRef.current.zoomToFit(400) : undefined}
+                linkDirectionalParticleColor={() => "#1E90FF"}
+                linkDirectionalArrowColor={() => "#1E90FF"}
+                linkDirectionalParticles={linkParticles ? 3 : undefined}
+                linkDirectionalParticleWidth={linkParticles ? 3 : undefined}
                 dagMode={dagModes[dagMode]}
                 graphData={{
                     nodes: graph.nodes,
@@ -141,4 +145,4 @@ export default memo(function Graph({ graph, isLastGraph, width, height, selected
             />
         </div>
     )
-})
+});

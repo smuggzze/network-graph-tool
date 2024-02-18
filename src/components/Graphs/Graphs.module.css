@@ -33,7 +33,7 @@
     height: 25px;
 }
 
-.showParticles {
+.checkBox {
     display: flex;
     align-items: center;
     gap: 5px;

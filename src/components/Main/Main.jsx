@@ -13,7 +13,7 @@ export const nodeSize = 8;
 
 function Main() {
     const [selectedGraph, setSelectedGraph] = useState(null);
-    const [canvasOffset, setCanvasOffset] = useState(700);
+    const [canvasOffset, setCanvasOffset] = useState(720);
     const [addNetworkPopUp, setAddNetworkPopUp] = useState(false);
     const [graphs, setGraphs] = useState(JSON.parse(localStorage.getItem("graphs")) || []);
     const [addTutorialPopUp, setTutorialPopUp] = useState(true);
@@ -54,6 +54,7 @@ function Main() {
                         canvasOffset={canvasOffset} 
                         setCanvasOffset={setCanvasOffset} 
                         selectedNode={selectedNode}
+                        updateSelectedNode={updateSelectedNode}
                     />
                 </> :
                 <div className={styles.noNetworksFound}>

@@ -26,7 +26,7 @@ function NetworkListItem({ networkName, updateSelectedGraph, isSelected }) {
             onClick={() => updateSelectedGraph(networkName)}>
                 {networkName}
             </p>
-            <button className={`btn ${styles.removeBtn}`} onClick={removeGraph}>
+            <button className="btn removeBtn" onClick={removeGraph}>
                 Remove
             </button>
         </div>

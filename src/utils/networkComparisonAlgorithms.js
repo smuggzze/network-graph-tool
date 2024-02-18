@@ -1,23 +1,12 @@
-import { graphColours } from "./graphColours";
+import { getCentralityRanks } from "./getCentralityRanks";
 
-export class NetworkComparisonAlgorithms { 
-
-    static outDegreeCentrality(graph) { // function to calculate the out-degree centrality of a graph
-
-        // out-degree centrality = number of edges that leave the node
-        return Object.fromEntries(new Map(Array.from(graph.keys()).map((node) => { // create a map of nodes with their out-degree centrality
-            const outDegree = graph.get(node).length;  // get the out-degree centrality of the node
-            const bgColours = graphColours.Centrality; // get the background colours for the out-degree centrality
-
-            const colour = outDegree >= 10 ? bgColours["Very high"] : // set the colour based on the out-degree centrality
-            outDegree >= 8 ? bgColours["High"] : outDegree >= 6 ?
-            bgColours["Medium"] : bgColours["Low"];
-
-            return [ // return the node and its out-degree centrality
-                node,
-                { ...colour }
-            ];
-        })));
+export class NetworkComparisonAlgorithms {
+    
+    static outDegreeCentrality(graph) {
+        const outDegrees = Array.from(graph.keys())
+        .map((node) => [node, graph.get(node).length]);
+        
+        return getCentralityRanks(outDegrees);
     }
 
     static inDegreeCentrality(graph) {
@@ -32,20 +21,11 @@ export class NetworkComparisonAlgorithms {
             }
         }
 
-        return Object.fromEntries(new Map(Array.from(graph.keys()).map((node) => { // create a map of nodes with their in-degree centrality
-            const inDegree = nodes.get(node); // get the in-degree centrality of the node
-            const bgColours = graphColours.Centrality; // get the background colours for the in-degree centrality
+        const inDegrees = Array.from(graph.keys())
+        .map((node) => [node, nodes.get(node)]);
 
-            const colour = inDegree >= 10 ? bgColours["Very high"] :  // set the colour based on the in-degree centrality
-            inDegree >= 8 ? bgColours["High"] : inDegree >= 6 ? // set the colour based on the in-degree centrality
-            bgColours["Medium"] : bgColours["Low"]; // set the colour based on the in-degree centrality
-
-            return [ // return the node and its in-degree centrality
-                node,
-                { ...colour }
-            ];
-        })));
-    }      
+        return getCentralityRanks(inDegrees);
+    }
 
     static betweennessCentrality(graph) {
 
