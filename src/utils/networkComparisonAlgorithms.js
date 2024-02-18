@@ -61,23 +61,23 @@ export class NetworkComparisonAlgorithms {
                     console.log(node);
                     const adjList = graph.get(node);
 
-                    adjList.forEach(neighbour => { // for each neighbour of the current node
-                        if (distance.get(neighbour) < 0) { // if the distance of the neighbour is less than 0
-                            queue.push(neighbour); // add the neighbour to the queue
-                            distance.set(neighbour, distance.get(currentNode) + 1); // set the distance of the neighbour to the distance of the current node + 1
+                    for(let i=0; i<=adjList.length; i++) { // for each neighbour of the current node
+                        if (distance.get(adjList[i]) < 0) { // if the distance of the neighbour is less than 0
+                            queue.push(adjList[i]); // add the neighbour to the queue
+                            distance.set(adjList[i], distance.get(currentNode) + 1); // set the distance of the neighbour to the distance of the current node + 1
                         }
-                        if (distance.get(neighbour) === distance.get(currentNode) + 1) { // if the distance of the neighbour is equal to the distance of the current node + 1
-                            numShortestPaths.set(neighbour, numShortestPaths.get(neighbour) + numShortestPaths.get(currentNode)); // increment the number of shortest paths of the neighbour by the number of shortest paths of the current node
-                            predecessors.get(neighbour).push(currentNode); // add the current node to the predecessors of the neighbour
+                        if (distance.get(adjList[i]) === distance.get(currentNode) + 1) { // if the distance of the neighbour is equal to the distance of the current node + 1
+                            numShortestPaths.set(adjList[i], numShortestPaths.get(adjList[i]) + numShortestPaths.get(currentNode)); // increment the number of shortest paths of the neighbour by the number of shortest paths of the current node
+                            predecessors.get(adjList[i]).push(currentNode); // add the current node to the predecessors of the neighbour
                         }
-                    });
+                    };
                 }
                 while (stack.length > 0) { // while the stack is not empty
                     const currentNode = stack.pop(); // remove the last node from the stack
-                    predecessors.get(currentNode).forEach(predecessor => { // for each predecessor of the current node
+                    for (let predecessor of predecessors.keys(currentNode)) { // iterate over the keys of the predecessors map
                         const dependency = (numShortestPaths.get(predecessor) / numShortestPaths.get(currentNode)) * (1 + dependencies.get(currentNode)); // calculate the dependency of the current node
                         dependencies.set(predecessor, dependencies.get(predecessor) + dependency); // increment the dependency of the predecessor by the dependency of the current node
-                    });
+                    }
                     if (currentNode !== node) { // if the current node is not the current node
                         betweenness.set(currentNode, betweenness.get(currentNode) + dependencies.get(currentNode)); // increment the betweenness centrality of the current node by the dependency of the current node
                     }
