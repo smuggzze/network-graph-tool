@@ -78,12 +78,6 @@ export default memo(function Graph({ graph, isLastGraph, width, height, selected
         setDagMode(mode);
     }
 
-    function handleNodeDrag(node) {
-        node.fx = node.x;
-        node.fy = node.y;
-        node.fz = node.z;
-    }
-
     function toggleLinkParticles(e) {
         const checked = e.target.checked;
         updateGraphLocalStorage({ showParticles: checked }, graph.networkName);
@@ -163,7 +157,6 @@ export default memo(function Graph({ graph, isLastGraph, width, height, selected
                 linkDirectionalArrowLength={graph.isDirected ? 5 : undefined}
                 nodeCanvasObject={handleDrawNode}
                 linkCurvature={0.20}
-                onNodeDragEnd={handleNodeDrag}
                 onNodeClick={handleNodeClick}
                 cooldownTicks={zoomToFit ? 100 : undefined}
                 onEngineStop={zoomToFit ? () => graphRef.current.zoomToFit(400) : undefined}
