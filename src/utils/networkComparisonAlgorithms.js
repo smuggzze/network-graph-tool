@@ -1,7 +1,7 @@
+import { convertToAdjList } from "./convertToAdjList";
 import { getCentralityRanks } from "./getCentralityRanks";
 
 export class NetworkComparisonAlgorithms {
-    
     static outDegreeCentrality(graph) {
         const outDegrees = Array.from(graph.keys())
         .map((node) => [node, graph.get(node).length]);
@@ -30,16 +30,18 @@ export class NetworkComparisonAlgorithms {
     static betweennessCentrality(graph) {
 
             const betweenness = new Map(); // create a map of nodes with their betweenness centrality
-
+            const nodes = Array.from(graph.keys());
+            console.log(nodes);
             
-            graph.nodes().forEach(node => betweenness.set(node, 0)); // initialize the betweenness centrality of each node to 0
-            graph.nodes().forEach(node => { // for each node in the graph
+            
+            nodes.forEach(node => betweenness.set(node, 0)); // initialize the betweenness centrality of each node to 0
+            nodes.forEach(node => { // for each node in the graph
                 const dependencies = new Map(); 
                 const numShortestPaths = new Map();
                 const distance = new Map();
                 const predecessors = new Map();
 
-                graph.nodes().filter(n => n !== node).forEach(n => { // for each node in the graph that is not the current node
+                nodes.filter(n => n !== node).forEach(n => { // for each node in the graph that is not the current node
                     dependencies.set(n, []); // initialize the dependencies of the node to an empty array
                     numShortestPaths.set(n, 0); // initialize the number of shortest paths of the node to 0
                     distance.set(n, -1); // initialize the distance of the node to -1
@@ -55,8 +57,11 @@ export class NetworkComparisonAlgorithms {
                 while (queue.length > 0) { // while the queue is not empty
                     const currentNode = queue.shift(); // remove the first node from the queue
                     stack.push(currentNode); // add the current node to the stack
+                    console.log(graph.get(node));
+                    console.log(node);
+                    const adjList = graph.get(node);
 
-                    graph.neighbors(currentNode).forEach(neighbour => { // for each neighbour of the current node
+                    adjList.forEach(neighbour => { // for each neighbour of the current node
                         if (distance.get(neighbour) < 0) { // if the distance of the neighbour is less than 0
                             queue.push(neighbour); // add the neighbour to the queue
                             distance.set(neighbour, distance.get(currentNode) + 1); // set the distance of the neighbour to the distance of the current node + 1
@@ -79,9 +84,8 @@ export class NetworkComparisonAlgorithms {
                 }
             });
             const betweennessy = Array.from(graph.keys()).map((node) => [node, betweenness.get(node)]);
-            return getCentralityRank(betweennessy)
-        
-         
+            return getCentralityRanks(betweennessy);
+                
         }
 
     static inboundClosenessCentrality(graph) {
@@ -105,8 +109,7 @@ export class NetworkComparisonAlgorithms {
     static jaccardSimilarity(graph) {
         // paige
         // jaccard similarity = (common nodes) / (total nodes)
-        const nodes = new Map(Array.from(graph.keys()).map((node) => [node, 0])); // create a map of nodes with a value of 0
-        totalNodes = nodes.size
+
 
 
 
@@ -115,4 +118,4 @@ export class NetworkComparisonAlgorithms {
     static stronglyConnectedComponents(graph) {
         // strongly connected components = a set of nodes in a directed graph that are all reachable from each other
 
-    }
+    }}
