@@ -3,10 +3,10 @@
 export const graphColours = {
     "Centrality": {
         "Very high": {
-            "fillStyle": "#4682B4",
-            "strokeStyle": "#4682B4",
+            "fillStyle": "#1E90FF",
+            "strokeStyle": "#1E90FF",
             "textStyle": "white",
-            "size": 14
+            "size": 16
         },
         "High": {
             "fillStyle": "#87CEFA",
@@ -15,8 +15,8 @@ export const graphColours = {
             "size": 12,
         },
         "Medium": {
-            "fillStyle": "#1E90FF",
-            "strokeStyle": "#1E90FF",
+            "fillStyle": "#4682B4",
+            "strokeStyle": "#4682B4",
             "textStyle": "white",
             "size": 10
         },

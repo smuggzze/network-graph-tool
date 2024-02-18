@@ -4,15 +4,8 @@
     margin-bottom: 20px;
 }
 
-.exitBtn {
-    width: 30px;
-    height: 30px;
-    background-color: #e43131;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    display: block;
+.exitWrapper {
     margin-left: auto;
-    margin-bottom: 20px;
-    cursor: pointer;
+    margin-bottom: 10px;
+    width: fit-content;
 }

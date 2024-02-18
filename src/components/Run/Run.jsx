@@ -1,5 +1,5 @@
 import styles from "./Run.module.css";
-import MoreInfo from "../MoreInfo";
+import MoreInfo from "../MoreInfo/MoreInfo";
 
 function Run({ label, moreInfo, runAlgorithm, data }) {
     return (

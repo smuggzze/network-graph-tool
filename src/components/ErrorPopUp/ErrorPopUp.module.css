@@ -1,0 +1,19 @@
+
+.error {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    background-color: rgb(228, 49, 49);
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.158);
+    bottom: 35px;
+    border-radius: 10px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.errorMessage {
+    color: white;
+}

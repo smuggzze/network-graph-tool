@@ -5,23 +5,23 @@ export const tutorialData = [
         title: "Welcome to the tutorial!",
         videoLink: "https://www.youtube.com/embed?v=102_iWHTvfY",
         text: "In this tutorial, you will learn how to use the application effectively. \
-        This includes how to add a network, visualise it, and interact with the visualisation.\
+        This includes how to create a network, visualise it, and interact with the visualisation.\
         You can navigate through the tutorial using the back and forward buttons below.\
         You can also exit the tutorial at any time by clicking the X button in the top right corner.",
     },
     {
-        title: "How to add a network",
+        title: "How to create a network",
         videoLink: "https://www.youtube.com/embed?v=102_iWHTvfY",
-        text: "Click the 'Add Network' button in the sidebar. or the 'Add Network' button on the graph space.\
-        This will open a pop-up window where you can enter the name of the network you want to add.\
+        text: "Click the 'Create a network' button in the sidebar. or the 'Start visualising' button on the graph space.\
+        This will open a pop-up window where you can enter the name of the network you want to create.\
         you will also be required to supply a file containing the data for the network.\
         after clicking the create graph button, the network will be added to the sidebar and visualised",
     },
     {
-        title: "How to add another network",
+        title: "How to create another network",
         videoLink: "https://www.youtube.com/embed?v=102_iWHTvfY",
-        text: "The top left of the network sidebar contains a button labelled 'Add Network'.\
-        Clicking this button will open the same pop-up window as before, following the previous steps will add another network",
+        text: "The top left of the network sidebar contains a button labelled 'Create a Network'.\
+        Clicking this button will open the same pop-up window as before, following the previous steps will create another network",
     },
     {
         title: "How to use the algorithms to compare networks",
